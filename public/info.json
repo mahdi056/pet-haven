@@ -1,0 +1,48 @@
+[
+    {
+      
+      "image": "https://i.ibb.co.com/qL3cf9RM/dog.jpg",
+      "name": "Buddy",
+      "age": "2 years",
+      "category": "Dog",
+      "location": "Dhaka, Bangladesh",
+      "description": "A playful and friendly Labrador looking for a loving home."
+    },
+    {
+     
+      "image": "https://i.ibb.co.com/dJXVbGdb/cat.jpg",
+      "name": "Mimi",
+      "age": "1.5 years",
+      "category": "Cat",
+      "location": "Chattogram, Bangladesh",
+      "description": "A calm and affectionate Persian cat who loves cuddles."
+    },
+    {
+      
+      "image": "https://i.ibb.co.com/S4wqgC4t/rabbit.webp",
+      "name": "Coco",
+      "age": "1 year",
+      "category": "Rabbit",
+      "location": "Sylhet, Bangladesh",
+      "description": "An energetic bunny that enjoys hopping around and being held."
+    },
+    {
+      
+      "image": "https://i.ibb.co.com/WvfCVmsP/fish.jpg",
+      "name": "Goldie",
+      "age": "6 months",
+      "category": "Fish",
+      "location": "Rajshahi, Bangladesh",
+      "description": "A beautiful goldfish that adds color and calm to any aquarium."
+    },
+    {
+      
+      "image": "https://i.ibb.co.com/MkgrDfdj/bird.jpg",
+      "name": "Rio",
+      "age": "3 years",
+      "category": "Bird",
+      "location": "Khulna, Bangladesh",
+      "description": "A talkative parrot who loves attention and mimicking sounds."
+    }
+  ]
+  
