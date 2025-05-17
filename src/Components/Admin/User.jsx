@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { RxAvatar } from "react-icons/rx";
 
 const User = () => {
   const [users, setUsers] = useState([]);
@@ -46,7 +47,14 @@ const User = () => {
               <tr key={user._id}>
                 <td>{index + 1}</td>
                 <td>
-                  <img src={user.image} alt="User" className="w-10 h-10 rounded-full" />
+                  {
+                    user.image ? ( <img src={user?.image} alt="User" className="w-10 h-10 rounded-full" />)
+                    :
+                    ( 
+                      <RxAvatar className="w-8 h-8"></RxAvatar>
+                    )
+                  }
+                 
                 </td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>

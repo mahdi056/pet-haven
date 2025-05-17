@@ -5,6 +5,7 @@ import './index.css'
 
 import {
   createBrowserRouter,
+  Navigate,
   RouterProvider,
 } from "react-router";
 import Root from './Components/Root';
@@ -31,6 +32,7 @@ import User from './Components/Admin/User';
 import AllPets from './Components/Admin/AllPets';
 import AllDonations from './Components/Admin/AllDonations';
 import ErrorPage from './Components/ErrorPage';
+import DashboardRedirect from './Components/DashboardRedirect';
 
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
 
@@ -75,6 +77,10 @@ const router = createBrowserRouter([
     element: <Dashboard></Dashboard>,
     children: [
       {
+      index: true, 
+      element: <DashboardRedirect></DashboardRedirect>
+      },
+      {
         
         path: '/dashboard/addpet',
         element: <Addpet></Addpet>
@@ -107,6 +113,7 @@ const router = createBrowserRouter([
         path: '/dashboard/edit-donation/:id',
         element: <EditDonation></EditDonation>
       },
+      
       {
         path: '/dashboard/users',
         element: <User></User>

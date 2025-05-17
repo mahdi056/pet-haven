@@ -26,6 +26,11 @@ const Header = () => {
               <li><NavLink to='/'>Home</NavLink></li>
               <li><NavLink to='/petlist'>Pet List</NavLink></li>
               <li><NavLink to='/donationcampaigns'>Donation Campaigns</NavLink></li>
+               {
+                    user ? (<li><NavLink to='/dashboard'>Dashboard</NavLink></li>)
+                    :
+                    (<li><NavLink to='/login'>Dashboard</NavLink></li>)
+                   }
             </ul>
           </div>
           <Link to='/'><div className='flex items-center'>
@@ -40,41 +45,23 @@ const Header = () => {
             <li><NavLink to='/'>Home</NavLink></li>
             <li><NavLink to='/petlist'>Pet List</NavLink></li>
             <li><NavLink to='/donationcampaigns'>Donation Campaigns</NavLink></li>
+             {
+                    user ? (<li><NavLink to='/dashboard'>Dashboard</NavLink></li>)
+                    :
+                    (<li> <NavLink to='/login'>Dashboard</NavLink></li>)
+                   }
           </ul>
         </div>
 
         {/* Navbar End */}
         <div className="navbar-end">
           {
-            user ? (
-              <>
+            user ? (<button onClick={SignOut} className='btn btn-outline btn-error'>Logout</button>)
+            :
+            (<Link to='/login'><button className='btn btn-warning'>Login</button></Link>)
+              
          
-                <div className="dropdown dropdown-end">
-                  <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                    <div className="w-10 rounded-full">
-                      {
-                        user?.photoURL? (<img src={user?.photoURL} alt='' />)
-                        :
-                        (<RxAvatar className='w-10 h-10'></RxAvatar>)
-                      }
-                    </div>
-                  </div>
-                  <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-36">
-
-                   {
-                    user ? ( <button className='btn btn-warning btn-sm'><Link to='/dashboard'>Dashboard</Link></button>)
-                    :
-                    ( <button className='btn btn-warning btn-sm'><Link to='/login'>Dashboard</Link></button>)
-                   }
-                    <button onClick={SignOut} className="btn btn-outline btn-error btn-sm mt-2">Logout</button>
-                  </ul>
-                </div>
-              </>
-            ) : (
-              <Link to='/login'>
-                <button className='btn btn-info'>Login</button>
-              </Link>
-            )
+              
           }
         </div>
       </div>
