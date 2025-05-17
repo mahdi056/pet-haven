@@ -15,11 +15,11 @@ const MyAddedPets = () => {
 
   useEffect(() => {
     if (!user?.email) return; 
-    console.log(user.email);
-    axios.get(`http://localhost:5000/pet-list-email?email=${user.email}`)
+    // console.log(user.email);
+    axios.get(`https://pet-haven-server-mu.vercel.app/pet-list-email?email=${user.email}`)
      
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         setPets(res.data)}
       )
       .catch(err => console.error(err));
@@ -27,7 +27,7 @@ const MyAddedPets = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:5000/pet-list/${selectedPetId}`);
+      await axios.delete(`https://pet-haven-server-mu.vercel.app/pet-list/${selectedPetId}`);
       setPets(pets.filter(pet => pet._id !== selectedPetId));
       setModalIsOpen(false);
     } catch (err) {
@@ -37,7 +37,7 @@ const MyAddedPets = () => {
 
   const handleAdopt = async (id) => {
     try {
-      await axios.patch(`http://localhost:5000/pet-list/${id}`, { adopted: true });
+      await axios.patch(`https://pet-haven-server-mu.vercel.app/pet-list/${id}`, { adopted: true });
       setPets(pets.map(pet => pet._id === id ? { ...pet, adopted: true } : pet));
     } catch (err) {
       console.error(err);

@@ -16,14 +16,14 @@ const DonationDetails = () => {
   const elements = useElements();
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/donation-campaign/${id}`)
+    axios.get(`https://pet-haven-server-mu.vercel.app/donation-campaign/${id}`)
       .then(res => setCampaign(res.data))
       .catch(err => console.error("Error fetching campaign details:", err));
   }, [id]);
 
   useEffect(() => {
     if (donationAmount > 0) {
-      axios.post('http://localhost:5000/create-payment-intent', {
+      axios.post('https://pet-haven-server-mu.vercel.app/create-payment-intent', {
         amount: donationAmount * 100, 
         currency: "bdt"
       })
@@ -51,7 +51,7 @@ const DonationDetails = () => {
 
 const deadline = new Date(campaign.deadline); 
 const today = new Date();
-console.log(today);
+// console.log(today);
 
 if (today > deadline) {
  Swal.fire(
@@ -100,7 +100,7 @@ if (today > deadline) {
       date: new Date(),
     };
 
-    await axios.post('http://localhost:5000/donations', donationData);
+    await axios.post('https://pet-haven-server-mu.vercel.app/donations', donationData);
 
     Swal.fire("Success", "Donation successful!", "success");
     setIsModalOpen(false);

@@ -10,7 +10,7 @@ const UpdatePet = () => {
   const [imageFile, setImageFile] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/pet-list/${id}`)
+    axios.get(`https://pet-haven-server-mu.vercel.app/pet-list/${id}`)
       .then(res => setPetData(res.data))
       .catch(err => console.error(err));
   }, [id]);
@@ -35,7 +35,7 @@ const UpdatePet = () => {
     }
 
     try {
-      await axios.patch(`http://localhost:5000/pet-list/${id}`, updatedPet);
+      await axios.patch(`https://pet-haven-server-mu.vercel.app/pet-list/${id}`, updatedPet);
 
 
       Swal.fire({

@@ -10,7 +10,7 @@ const AdoptionRequest = () => {
   useEffect(() => {
     if (user?.email) {
       axios
-        .get(`http://localhost:5000/adopt?ownerEmail=${user.email}`)
+        .get(`https://pet-haven-server-mu.vercel.app/adopt?ownerEmail=${user.email}`)
         .then((res) => {
           setRequests(res.data);
         })
@@ -20,7 +20,7 @@ const AdoptionRequest = () => {
 
   const handleStatusChange = (id, newStatus) => {
     axios
-      .patch(`http://localhost:5000/adopt/${id}`, { status: newStatus })
+      .patch(`https://pet-haven-server-mu.vercel.app/adopt/${id}`, { status: newStatus })
       .then(() => {
         toast.success(`Request ${newStatus} successfully`);
         setRequests((prev) =>

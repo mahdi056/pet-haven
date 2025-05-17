@@ -12,7 +12,7 @@ const PetLists = () => {
  
 
   useEffect(() => {
-    axios.get('http://localhost:5000/pet-list')
+    axios.get('https://pet-haven-server-mu.vercel.app/pet-list')
       .then(res => {
         setPets(res.data);
         setFilteredPets(res.data);

@@ -8,7 +8,7 @@ const MyDonations = () => {
 
   useEffect(() => {
     if (user?.email) {
-      axios.get(`http://localhost:5000/donations?email=${user.email}`)
+      axios.get(`https://pet-haven-server-mu.vercel.app/donations?email=${user.email}`)
         .then(res => setDonations(res.data))
         .catch(err => console.error('Error fetching donations:', err));
     }

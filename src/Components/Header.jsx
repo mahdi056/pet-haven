@@ -1,11 +1,11 @@
-import { Link, NavLink } from 'react-router'; 
+import { Link, NavLink } from 'react-router';
 import petLogo from '../assets/petLogo.png';
 import { useContext } from 'react';
 import { AuthContext } from './Provider/AuthProvider';
 import { RxAvatar } from "react-icons/rx";
 const Header = () => {
   const { user, SignOut } = useContext(AuthContext);
-  
+
 
   return (
     <div>
@@ -26,11 +26,9 @@ const Header = () => {
               <li><NavLink to='/'>Home</NavLink></li>
               <li><NavLink to='/petlist'>Pet List</NavLink></li>
               <li><NavLink to='/donationcampaigns'>Donation Campaigns</NavLink></li>
-               {
-                    user ? (<li><NavLink to='/dashboard'>Dashboard</NavLink></li>)
-                    :
-                    (<li><NavLink to='/login'>Dashboard</NavLink></li>)
-                   }
+              {
+               user && (<li><NavLink to='/dashboard'>Dashboard</NavLink></li>)
+              }
             </ul>
           </div>
           <Link to='/'><div className='flex items-center'>
@@ -45,11 +43,12 @@ const Header = () => {
             <li><NavLink to='/'>Home</NavLink></li>
             <li><NavLink to='/petlist'>Pet List</NavLink></li>
             <li><NavLink to='/donationcampaigns'>Donation Campaigns</NavLink></li>
-             {
-                    user ? (<li><NavLink to='/dashboard'>Dashboard</NavLink></li>)
-                    :
-                    (<li> <NavLink to='/login'>Dashboard</NavLink></li>)
-                   }
+            
+               {
+               user && (<li><NavLink to='/dashboard'>Dashboard</NavLink></li>)
+              }
+               
+            
           </ul>
         </div>
 
@@ -57,11 +56,11 @@ const Header = () => {
         <div className="navbar-end">
           {
             user ? (<button onClick={SignOut} className='btn btn-outline btn-error'>Logout</button>)
-            :
-            (<Link to='/login'><button className='btn btn-warning'>Login</button></Link>)
-              
-         
-              
+              :
+              (<Link to='/login'><button className='btn btn-warning'>Login</button></Link>)
+
+
+
           }
         </div>
       </div>

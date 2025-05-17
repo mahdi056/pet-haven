@@ -15,7 +15,7 @@ const Dashboard = () => {
   const { user } = useContext(AuthContext);
   const [currentUserRole, setCurrentUserRole] = useState('');
   useEffect(() => {
-    axios.get('http://localhost:5000/users')
+    axios.get('https://pet-haven-server-mu.vercel.app/users')
       .then((res) => {
         const loggedInUser = res.data.find((u) => u.email === user.email);
 

@@ -9,7 +9,7 @@ const EditDonation = () => {
     const [campaign, setCampaign] = useState(null);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/donation-campaigns/${id}`)
+        axios.get(`https://pet-haven-server-mu.vercel.app/donation-campaigns/${id}`)
             .then(res => setCampaign(res.data))
             .catch(err => {
                 console.error(err);
@@ -29,7 +29,7 @@ const EditDonation = () => {
         e.preventDefault();
 
         try {
-            await axios.patch(`http://localhost:5000/donation-campaigns/${id}`, {
+            await axios.patch(`https://pet-haven-server-mu.vercel.app/donation-campaigns/${id}`, {
                 maxAmount: Number(campaign.maxAmount),
                 paused: campaign.paused
             });

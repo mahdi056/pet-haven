@@ -14,7 +14,7 @@ const PetDetails = () => {
   const [address, setAddress] = useState("");
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/pet-list/${id}`)
+    axios.get(`https://pet-haven-server-mu.vercel.app/pet-list/${id}`)
       .then(res => setPet(res.data))
       .catch(err => console.error("Error fetching pet details:", err));
   }, [id]);
@@ -39,7 +39,7 @@ const PetDetails = () => {
       address,
     };
 
-    axios.post("http://localhost:5000/adopt", adoptionData)
+    axios.post("https://pet-haven-server-mu.vercel.app/adopt", adoptionData)
       .then(() => {
         toast.success("Adoption request submitted!",{
           position: 'top-center',

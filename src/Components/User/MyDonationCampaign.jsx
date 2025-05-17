@@ -11,7 +11,7 @@ const MyDonationCampaign = () => {
   const [showDonorModal, setShowDonorModal] = useState(false);
  
   useEffect(() => {
-    axios.get(`http://localhost:5000/donation-campaigns?email=${user.email}`)
+    axios.get(`https://pet-haven-server-mu.vercel.app/donation-campaigns?email=${user.email}`)
       .then(res => {
      
         setCampaigns(res.data)}
@@ -21,7 +21,7 @@ const MyDonationCampaign = () => {
 
   const handlePauseToggle = async (id, currentStatus) => {
     try {
-      await axios.patch(`http://localhost:5000/donation-campaigns/${id}`, { paused: !currentStatus });
+      await axios.patch(`https://pet-haven-server-mu.vercel.app/donation-campaigns/${id}`, { paused: !currentStatus });
       setCampaigns(prev => prev.map(c => c._id === id ? { ...c, paused: !currentStatus } : c));
       Swal.fire("Success", `Campaign ${!currentStatus ? "paused" : "unpaused"}`, "success");
     } catch (err) {
@@ -32,7 +32,7 @@ const MyDonationCampaign = () => {
 
   const handleViewDonors = async (campaignId) => {
     try {
-      const res = await axios.get(`http://localhost:5000/donations/${campaignId}`);
+      const res = await axios.get(`https://pet-haven-server-mu.vercel.app/donations/${campaignId}`);
       
       setSelectedDonors(res.data);
       setShowDonorModal(true);

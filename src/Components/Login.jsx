@@ -24,7 +24,7 @@ const Login = () => {
                 };
 
                 try {
-                    const res = await axios.post('http://localhost:5000/users', userInfo);
+                    const res = await axios.post('https://pet-haven-server-mu.vercel.app/users', userInfo);
                     if (res.data.insertedId) {
                         toast.success("Google Sign-Up Successful!", { position: "top-center" });
                         navigate('/');
