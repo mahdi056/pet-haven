@@ -57,7 +57,7 @@ const Addpet = () => {
     };
 
     try {
-      await axios.post('https://pet-haven-server-mu.vercel.app/pet-list', newPet);
+      await axios.post('http://localhost:5000/pet-list', newPet);
       toast.success('Pet added successfully!', {
         position: 'top-center',
         autoClose: 2000

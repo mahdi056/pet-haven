@@ -10,7 +10,7 @@ const AdoptionRequest = () => {
   useEffect(() => {
     if (user?.email) {
       axios
-        .get(`https://pet-haven-server-mu.vercel.app/adopt?ownerEmail=${user.email}`)
+        .get(`http://localhost:5000/adopt?ownerEmail=${user.email}`)
         .then((res) => {
           setRequests(res.data);
         })
@@ -20,7 +20,7 @@ const AdoptionRequest = () => {
 
   const handleStatusChange = (id, newStatus) => {
     axios
-      .patch(`https://pet-haven-server-mu.vercel.app/adopt/${id}`, { status: newStatus })
+      .patch(`http://localhost:5000/adopt/${id}`, { status: newStatus })
       .then(() => {
         toast.success(`Request ${newStatus} successfully`);
         setRequests((prev) =>
@@ -31,6 +31,22 @@ const AdoptionRequest = () => {
       })
       .catch((err) => {
         toast.error("Failed to update status");
+        console.error(err);
+      });
+    };
+
+
+     const handleDelete = (id) => {
+    
+
+    axios
+      .delete(`http://localhost:5000/adopt-request/${id}`)
+      .then(() => {
+        toast.success("Request deleted successfully");
+        setRequests((prev) => prev.filter((req) => req._id !== id));
+      })
+      .catch((err) => {
+        toast.error("Failed to delete request");
         console.error(err);
       });
   };
@@ -52,7 +68,7 @@ const AdoptionRequest = () => {
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Location</th>
-                <th>Status</th>
+                {/* <th>Status</th> */}
                 <th>Action</th>
               </tr>
             </thead>
@@ -72,7 +88,7 @@ const AdoptionRequest = () => {
                   <td>{req.adopterEmail}</td>
                   <td>{req.phone}</td>
                   <td>{req.address}</td>
-                  <td>
+                  {/* <td>
                     <span
                       className={`badge ${
                         req.status === "Accepted"
@@ -84,8 +100,8 @@ const AdoptionRequest = () => {
                     >
                       {req.status || "Pending"}
                     </span>
-                  </td>
-                  <td className="space-x-2 space-y-2">
+                  </td> */}
+                  {/* <td className="space-x-2 space-y-2">
                     <button
                       onClick={() => handleStatusChange(req._id, "Accepted")}
                       className="btn btn-sm btn-success"
@@ -100,6 +116,12 @@ const AdoptionRequest = () => {
                     >
                       Reject
                     </button>
+                  </td> */}
+
+                  <td>
+                    <button
+                    onClick={()=> handleDelete(req._id)}
+                    className="btn btn-sm btn-error">Delete</button>
                   </td>
                 </tr>
               ))}

@@ -6,7 +6,7 @@ const DonationCampaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
 
   useEffect(() => {
-    axios.get("https://pet-haven-server-mu.vercel.app/donation-campaign")
+    axios.get("http://localhost:5000/donation-campaign")
       .then((res) => {
         // Sort by createdAt in descending order
         const sorted = res.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));

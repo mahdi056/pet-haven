@@ -20,7 +20,7 @@ const AllPets = () => {
 
   const fetchPets = async () => {
     try {
-      const res = await axios.get("https://pet-haven-server-mu.vercel.app/petlist");
+      const res = await axios.get("http://localhost:5000/petlist");
       setPets(res.data);
     } catch (error) {
       console.error("Failed to fetch pets", error);
@@ -41,7 +41,7 @@ const AllPets = () => {
     if (!result.isConfirmed) return;
 
     try {
-      await axios.delete(`https://pet-haven-server-mu.vercel.app/petlist/${id}`);
+      await axios.delete(`http://localhost:5000/petlist/${id}`);
       toast.success("Pet deleted successfully");
       fetchPets();
     } catch (error) {
@@ -53,7 +53,7 @@ const AllPets = () => {
     const newStatus = currentStatus === "Adopted" ? "Not Adopted" : "Adopted";
 
     try {
-      await axios.patch(`https://pet-haven-server-mu.vercel.app/petlist/${id}`, { adoptionStatus: newStatus });
+      await axios.patch(`http://localhost:5000/petlist/${id}`, { adoptionStatus: newStatus });
       toast.success("Status updated");
       fetchPets();
     } catch (error) {
@@ -77,7 +77,7 @@ const AllPets = () => {
 
   const handleUpdateSubmit = async () => {
     try {
-      await axios.patch(`https://pet-haven-server-mu.vercel.app/petlist/${selectedPet._id}`, updateData);
+      await axios.patch(`http://localhost:5000/petlist/${selectedPet._id}`, updateData);
       toast.success("Pet updated successfully");
       setSelectedPet(null);
       fetchPets();

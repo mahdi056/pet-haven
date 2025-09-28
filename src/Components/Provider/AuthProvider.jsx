@@ -45,37 +45,40 @@ const AuthProvider = ({children}) => {
         
     }
 
-    useEffect(()=>{
-        const unsubscribe = onAuthStateChanged(auth, currentuser=>{
-            if (currentuser){
-                const userdata = {
-                    displayName: currentuser.displayName,
-                    email: currentuser.email,
-                    photoURL: currentuser.photoURL,
-                }
-                setUser(userdata);
-                
-            }
-            else {
-                setUser(null);
-            }
+   useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+    if (currentUser) {
+      
+      await currentUser.reload();
 
-            setLoading(false);
-        })
+      const userdata = {
+        displayName: currentUser.displayName,
+        email: currentUser.email,
+        image: currentUser.photoURL,
+        emailVerified: currentUser.emailVerified,
+        uid: currentUser.uid,
+      };
 
-        return ()=> unsubscribe();
+      setUser(userdata);
+    } else {
+      setUser(null);
+    }
 
+    setLoading(false);
+  });
 
-    },[])
+  return () => unsubscribe();
+}, []);
 
-   if (loading) {
+    if (loading) {
   return (
     <div className="flex items-center justify-center min-h-screen">
-      <div className="w-full max-w-2xl space-y-6 p-4">
-        <Skeleton height={200} />
-        <Skeleton height={30} width="60%" />
-        <Skeleton count={4} />
-      </div>
+      
+      <div className="flex justify-center items-center">
+        
+        <span className="loading loading-spinner loading-xl"></span></div>
+
+
     </div>
   );
 }

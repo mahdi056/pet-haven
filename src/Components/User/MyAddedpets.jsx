@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useReactTable, getCoreRowModel, getSortedRowModel, flexRender } from '@tanstack/react-table';
 import axios from 'axios';
 import { AuthContext } from '../Provider/AuthProvider';
@@ -16,10 +16,10 @@ const MyAddedPets = () => {
   useEffect(() => {
     if (!user?.email) return; 
     // console.log(user.email);
-    axios.get(`https://pet-haven-server-mu.vercel.app/pet-list-email?email=${user.email}`)
+    axios.get(`http://localhost:5000/pet-list-email?email=${user.email}`)
      
       .then(res => {
-        // console.log(res.data);
+       
         setPets(res.data)}
       )
       .catch(err => console.error(err));
@@ -27,7 +27,7 @@ const MyAddedPets = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`https://pet-haven-server-mu.vercel.app/pet-list/${selectedPetId}`);
+      await axios.delete(`http://localhost:5000/pet-list/${selectedPetId}`);
       setPets(pets.filter(pet => pet._id !== selectedPetId));
       setModalIsOpen(false);
     } catch (err) {
@@ -37,7 +37,7 @@ const MyAddedPets = () => {
 
   const handleAdopt = async (id) => {
     try {
-      await axios.patch(`https://pet-haven-server-mu.vercel.app/pet-list/${id}`, { adopted: true });
+      await axios.patch(`http://localhost:5000/pet-list/${id}`, { adopted: true });
       setPets(pets.map(pet => pet._id === id ? { ...pet, adopted: true } : pet));
     } catch (err) {
       console.error(err);
@@ -62,11 +62,11 @@ const MyAddedPets = () => {
       accessorKey: 'image',
       cell: info => <img src={info.getValue()} alt="pet" className="w-16 h-16 rounded" />
     },
-    {
-      header: 'Status',
-      accessorKey: 'adopted',
-      cell: info => info.getValue() ? 'Adopted' : 'Not Adopted'
-    },
+    // {
+    //   header: 'Status',
+    //   accessorKey: 'adopted',
+    //   cell: info => info.getValue() ? 'Adopted' : 'Not Adopted'
+    // },
     {
       header: 'Actions',
       cell: info => {
@@ -76,11 +76,11 @@ const MyAddedPets = () => {
             <button onClick={() => navigate(`/dashboard/updatepet/${pet._id}`)} className="btn btn-sm btn-primary">Update</button>
             <button onClick={() => { setSelectedPetId(pet._id); setModalIsOpen(true); }} className="btn btn-sm btn-error">Delete</button>
          
-            {
+            {/* {
               pet.adopted ? ( <button onClick={() => handleAdopt(pet._id)} className="btn btn-sm btn-success">Adopted</button>)
               :
               ( <button onClick={() => handleAdopt(pet._id)} className="btn btn-sm btn-success">Adopt</button>)
-            }
+            } */}
           </div>
         );
       }
@@ -91,8 +91,7 @@ const MyAddedPets = () => {
     data: pets,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    state: {}
+   
   });
 
   return (

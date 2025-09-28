@@ -5,6 +5,7 @@ import { GiRabbit } from 'react-icons/gi';
 import adoptPet from '../assets/adopt-pet.jpg'
 
 
+
 const Home = () => {
  
     const categories = [
@@ -81,7 +82,7 @@ const Home = () => {
           {categories.map((cat, idx) => (
             <div
               key={idx}
-              className="bg-white shadow-md hover:shadow-xl transition p-6 rounded-xl flex flex-col items-center cursor-pointer border border-transparent hover:border-orange-400"
+              className="bg-white shadow-md p-6 rounded-xl flex flex-col items-center  "
             >
               <div className="text-orange-500 mb-3">{cat.icon}</div>
               <h3 className="text-lg font-semibold text-gray-700">{cat.name}</h3>

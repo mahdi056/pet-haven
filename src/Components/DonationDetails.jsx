@@ -4,11 +4,13 @@ import axios from "axios";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import Swal from "sweetalert2";
 import { AuthContext } from "./Provider/AuthProvider";
+import { toast, ToastContainer } from "react-toastify";
 
 const DonationDetails = () => {
   const { user } = useContext(AuthContext);
   const { id } = useParams();
   const [campaign, setCampaign] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [donationAmount, setDonationAmount] = useState("");
   const [clientSecret, setClientSecret] = useState("");
@@ -16,103 +18,90 @@ const DonationDetails = () => {
   const elements = useElements();
 
   useEffect(() => {
-    axios.get(`https://pet-haven-server-mu.vercel.app/donation-campaign/${id}`)
+    axios.get(`http://localhost:5000/donation-campaign/${id}`)
       .then(res => setCampaign(res.data))
       .catch(err => console.error("Error fetching campaign details:", err));
   }, [id]);
 
-  useEffect(() => {
-    if (donationAmount > 0) {
-      axios.post('https://pet-haven-server-mu.vercel.app/create-payment-intent', {
-        amount: donationAmount * 100, 
-        currency: "bdt"
-      })
-        .then(res => setClientSecret(res.data.clientSecret))
-        .catch(err => console.error("Payment intent error:", err));
-    }
-  }, [donationAmount]);
+
 
   const handleDonate = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const max = Number(campaign.maxAmount);
-  const current = Number(campaign.donatedAmount || 0);
-  const newDonation = Number(donationAmount);
-  
+    const max = Number(campaign.maxAmount);
+    const current = Number(campaign.donatedAmount || 0);
+    const newDonation = Number(donationAmount);
 
-  if (current + newDonation > max) {
-    Swal.fire(
-      "Limit Exceeded",
-      `You cannot donate more than the remaining amount (৳${max - current})`,
-      "warning"
-    );
-    return;
-  }
-
-const deadline = new Date(campaign.deadline); 
-const today = new Date();
-// console.log(today);
-
-if (today > deadline) {
- Swal.fire(
-  "The donation deadline has passed.",
-   "You can no longer donate.",
-  "warning"
- )
-  return; 
-}
+    
 
 
 
-  if (!stripe || !elements) return;
 
-  const card = elements.getElement(CardElement);
-  if (!card) return;
+    if (current + newDonation > max) {
+      Swal.fire(
+        "Limit Exceeded",
+        `You cannot donate more than the remaining amount (৳${max - current})`,
+        "warning"
+      );
+      return;
+    }
 
-  const { paymentMethod, error: methodError } = await stripe.createPaymentMethod({
-    type: 'card',
-    card
-  });
+    const deadline = new Date(campaign.deadline);
+    const today = new Date();
+    
 
-  if (methodError) {
-    console.error(methodError);
-    Swal.fire("Error", methodError.message, "error");
-    return;
-  }
+    if (today > deadline) {
+      Swal.fire(
+        "The donation deadline has passed.",
+        "You can no longer donate.",
+        "warning"
+      )
+      return;
+    }
 
-  const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
-    payment_method: paymentMethod.id,
-  });
 
-  if (confirmError) {
-    console.error(confirmError);
-    Swal.fire("Error", confirmError.message, "error");
-    return;
-  }
+    const payload = {
+      amount: newDonation,
+      name: user.displayName || "Anonymous Donor",
+      email: user.email || "donor@example.com",
+      phone: "01707226784",
+    }
 
-  if (paymentIntent.status === 'succeeded') {
-    const donationData = {
-      campaignId: campaign._id,
-      amount: donationAmount,
-      donorEmail: user.email,
-      petImage: campaign.petImage,
-      petName: campaign.petName,
-      date: new Date(),
-    };
+    try {
+      const res = await axios.post("http://localhost:5000/api/payment", payload, {
+        headers: { "Content-Type": "application/json" },
+        timeout: 20000,
+      });
 
-    await axios.post('https://pet-haven-server-mu.vercel.app/donations', donationData);
+      console.log("Backend /api/payment response:", res.data);
 
-    Swal.fire("Success", "Donation successful!", "success");
-    setIsModalOpen(false);
-    setDonationAmount("");
-  }
-};
+      if (res.data && res.data.url) {
+        console.log("Redirecting user to payment gateway:", res.data.url);
+
+ 
+        window.location.href = res.data.url;
+      } else {
+        console.error("No gateway URL returned from backend.", res.data);
+        alert("Payment could not be started. Check console for details.");
+      }
+    } catch (err) {
+      console.error("Error calling /api/payment:", err.response?.data || err.message);
+      alert("Failed to initiate payment. Check console for details.");
+    } finally {
+      setLoading(false);
+    }
+
+
+
+   
+  };
 
 
   if (!campaign) return <div className="p-6">Loading...</div>;
 
   return (
     <div className="p-6 max-w-4xl mx-auto bg-white shadow-md rounded-md">
+      <ToastContainer></ToastContainer>
       <img
         src={campaign.petImage}
         alt="Pet"
@@ -126,22 +115,33 @@ if (today > deadline) {
       <p>{campaign.description}</p>
       <p className="mt-4 text-sm text-gray-500">Created At: {new Date(campaign.createdAt).toLocaleString()}</p>
 
-      {
-        user ? (<button
-        onClick={() => setIsModalOpen(true)}
-        className="mt-6 btn btn-warning btn-outline text-black px-4 py-2 rounded"
-        disabled={campaign.status == 'Paused' || campaign.paused == true}
-      >
-        Donate Now
-      </button>)
-      :
-      (<Link to='/login'><button
-        
-        className="mt-6 btn btn-warning btn-outline text-black px-4 py-2 rounded"
-      >
-        Donate Now
-      </button></Link>)
-      }
+      <div className="flex gap-x-4">
+
+        <div> {
+          user && user.emailVerified ? (<button
+            // onClick={() => setIsModalOpen(true)}
+            className="mt-6 btn btn-warning text-black px-4 py-2 rounded"
+            disabled={campaign.status == 'Paused' || campaign.paused == true}
+          >
+            Donate Now
+          </button>)
+            :
+            (<Link to='/login'><button
+
+              className="mt-6 btn btn-warning btn-outline text-black px-4 py-2 rounded"
+            >
+              Donate Now
+            </button></Link>)
+        }
+        </div>
+
+        <div>
+          <Link to='/donationcampaigns'><button className="btn btn-outline btn-error mt-6">Back</button></Link>
+        </div>
+
+      </div>
+
+
 
       {/* Modal */}
       {isModalOpen && (
@@ -162,13 +162,13 @@ if (today > deadline) {
                 />
               </label>
 
-              <div className="mb-4 mt-2">
+              {/* <div className="mb-4 mt-2">
                 <CardElement options={{ hidePostalCode: true }} />
-              </div>
+              </div> */}
 
               <button
                 type="submit"
-                disabled={!stripe || !clientSecret}
+
                 className="btn btn-warning text-black px-4 py-2  w-full"
               >
                 Confirm Donation

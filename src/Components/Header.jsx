@@ -6,7 +6,8 @@ import { RxAvatar } from "react-icons/rx";
 const Header = () => {
   const { user, SignOut } = useContext(AuthContext);
 
-
+console.log(user?.displayName);
+console.log(user?.email);
   return (
     <div>
       <div className="navbar bg-base-100 shadow-sm">
@@ -27,7 +28,7 @@ const Header = () => {
               <li><NavLink to='/petlist'>Pet List</NavLink></li>
               <li><NavLink to='/donationcampaigns'>Donation Campaigns</NavLink></li>
               {
-               user && (<li><NavLink to='/dashboard'>Dashboard</NavLink></li>)
+               user && user.emailVerified && (<li><NavLink to='/dashboard'>Dashboard</NavLink></li>)
               }
             </ul>
           </div>
@@ -43,10 +44,12 @@ const Header = () => {
             <li><NavLink to='/'>Home</NavLink></li>
             <li><NavLink to='/petlist'>Pet List</NavLink></li>
             <li><NavLink to='/donationcampaigns'>Donation Campaigns</NavLink></li>
+            {/* <li><NavLink to='/payment'>Payment</NavLink></li> */}
             
-               {
-               user && (<li><NavLink to='/dashboard'>Dashboard</NavLink></li>)
-              }
+            
+            {
+               user && user.emailVerified && (<li><NavLink to='/dashboard'>Dashboard</NavLink></li>)
+              } 
                
             
           </ul>
@@ -55,7 +58,9 @@ const Header = () => {
         {/* Navbar End */}
         <div className="navbar-end">
           {
-            user ? (<button onClick={SignOut} className='btn btn-outline btn-error'>Logout</button>)
+            user && user.emailVerified ? (<button 
+              onClick={SignOut} 
+              className='btn btn-outline btn-error'>Logout</button>)
               :
               (<Link to='/login'><button className='btn btn-warning'>Login</button></Link>)
 

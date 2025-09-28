@@ -56,7 +56,7 @@ const CreateDonationCampaign = () => {
         createdAt: new Date(),
       };
 
-      const res = await axios.post('https://pet-haven-server-mu.vercel.app/donation-campaign', campaignData);
+      const res = await axios.post('http://localhost:5000/donation-campaign', campaignData);
 
       if (res.data.insertedId) {
         toast.success('Donation campaign created', {

@@ -8,7 +8,7 @@ const User = () => {
 
   // Fetch users
   useEffect(() => {
-    axios.get("https://pet-haven-server-mu.vercel.app/users")
+    axios.get("http://localhost:5000/users")
       .then(res => setUsers(res.data))
       .catch(err => console.error(err));
   }, []);
@@ -16,7 +16,7 @@ const User = () => {
   // Make Admin handler
   const handleMakeAdmin = async (userId) => {
     try {
-      const res = await axios.put(`https://pet-haven-server-mu.vercel.app/users/admin/${userId}`);
+      const res = await axios.put(`http://localhost:5000/users/admin/${userId}`);
       if (res.data.modifiedCount > 0) {
         toast.success("User promoted to Admin!");
         setUsers(prev => prev.map(user => user._id === userId ? { ...user, role: 'admin' } : user));

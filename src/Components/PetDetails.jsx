@@ -14,7 +14,7 @@ const PetDetails = () => {
   const [address, setAddress] = useState("");
 
   useEffect(() => {
-    axios.get(`https://pet-haven-server-mu.vercel.app/pet-list/${id}`)
+    axios.get(`http://localhost:5000/pet-list/${id}`)
       .then(res => setPet(res.data))
       .catch(err => console.error("Error fetching pet details:", err));
   }, [id]);
@@ -39,7 +39,7 @@ const PetDetails = () => {
       address,
     };
 
-    axios.post("https://pet-haven-server-mu.vercel.app/adopt", adoptionData)
+    axios.post("http://localhost:5000/adopt", adoptionData)
       .then(() => {
         toast.success("Adoption request submitted!",{
           position: 'top-center',
@@ -61,17 +61,18 @@ const PetDetails = () => {
       <img
         src={pet.image}
         alt={pet.name}
-        className="w-full h-96 object-cover rounded-lg mb-6"
+        className="w-full h-96 rounded-lg mb-6"
       />
-      <p><strong>Age:</strong> {pet.age}</p>
+      <p className="mt-12"><strong>Age:</strong> {pet.age}</p>
       <p><strong>Category:</strong> {pet.category}</p>
       <p><strong>Location:</strong> {pet.location}</p>
       <p className="mt-2"><strong>Description:</strong> {pet.description}</p>
 
-     {
-        user ? ( <button
+     <div className="flex items-center gap-x-2 mt-4">
+      {
+        user && user.emailVerified ? ( <button
         onClick={() => setShowModal(true)}
-        className="btn btn-outline btn-warning mt-4"
+        className="btn btn-warning mt-4"
       >
         Adopt
       </button>)
@@ -83,6 +84,10 @@ const PetDetails = () => {
         <Link to='/login'>Adopt</Link>
       </button>)
      }
+
+
+     <Link to='/petlist'><button className="btn btn-outline btn-error mt-4">Back</button></Link>
+     </div>
 
       {/* Modal */}
      {showModal && (
@@ -115,7 +120,7 @@ const PetDetails = () => {
         <div className="mb-2">
           <label className="block text-sm font-medium">Phone Number</label>
           <input
-            type="text"
+            type="number"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             className="input input-bordered w-full"
@@ -131,6 +136,7 @@ const PetDetails = () => {
             required
           />
         </div>
+        <p className="text-sm text-center text-red-400 mb-4">Only Applicable for the Citizen of {pet.location}</p>
         <div className="flex justify-end gap-2">
           <button
             type="button"

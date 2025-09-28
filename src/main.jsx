@@ -33,6 +33,9 @@ import AllPets from './Components/Admin/AllPets';
 import AllDonations from './Components/Admin/AllDonations';
 import ErrorPage from './Components/ErrorPage';
 import DashboardRedirect from './Components/DashboardRedirect';
+import Blog from './Components/Blog';
+import Payment from './Components/Payment';
+import Success from './Components/Success';
 
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
 
@@ -69,6 +72,18 @@ const router = createBrowserRouter([
       {
         path: '/petlist/:id',
         element: <PetDetails></PetDetails>
+      },
+      {
+          path: '/blogs',
+          element: <Blog></Blog>
+      },
+      {
+        path: 'payment',
+        element: <Payment></Payment>
+      },
+      {
+        path: '/success',
+        element: <Success></Success>
       }
     ]
   },

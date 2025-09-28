@@ -13,7 +13,7 @@ const AllDonations = () => {
 
   const fetchCampaigns = async () => {
     try {
-      const res = await axios.get("https://pet-haven-server-mu.vercel.app/donationcampaigns");
+      const res = await axios.get("http://localhost:5000/donationcampaigns");
       setCampaigns(res.data);
     } catch (error) {
       toast.error("Failed to fetch campaigns");
@@ -34,7 +34,7 @@ const AllDonations = () => {
     if (!result.isConfirmed) return;
 
     try {
-      await axios.delete(`https://pet-haven-server-mu.vercel.app/donationcampaigns/${id}`);
+      await axios.delete(`http://localhost:5000/donationcampaigns/${id}`);
       toast.success("Campaign deleted");
       fetchCampaigns();
     } catch (error) {
@@ -45,7 +45,7 @@ const AllDonations = () => {
   const handleToggleStatus = async (id, currentStatus) => {
     const newStatus = currentStatus === "Active" ? "Paused" : "Active";
     try {
-      await axios.patch(`https://pet-haven-server-mu.vercel.app/donationcampaigns/${id}`, {
+      await axios.patch(`http://localhost:5000/donationcampaigns/${id}`, {
         status: newStatus,
       });
       toast.success(`Campaign ${newStatus.toLowerCase()} successfully`);
@@ -57,7 +57,7 @@ const AllDonations = () => {
 
   const handleEdit = async () => {
     try {
-      await axios.patch(`https://pet-haven-server-mu.vercel.app/donationcampaigns/${editingCampaign._id}`, {
+      await axios.patch(`http://localhost:5000/donationcampaigns/${editingCampaign._id}`, {
         title: editingCampaign.title,
         description: editingCampaign.description,
         petImage: editingCampaign.petImage,

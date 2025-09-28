@@ -4,6 +4,7 @@ import { AuthContext } from './Provider/AuthProvider';
 import { toast, ToastContainer } from 'react-toastify';
 import { Link, useNavigate } from 'react-router';
 import axios from 'axios';
+import { auth } from '../../firebase.init';
 
 const Login = () => {
 
@@ -24,7 +25,7 @@ const Login = () => {
                 };
 
                 try {
-                    const res = await axios.post('https://pet-haven-server-mu.vercel.app/users', userInfo);
+                    const res = await axios.post('http://localhost:5000/users', userInfo);
                     if (res.data.insertedId) {
                         toast.success("Google Sign-Up Successful!", { position: "top-center" });
                         navigate('/');
@@ -43,24 +44,34 @@ const Login = () => {
             });
     }
 
-    const handleLogin = (e) => {
-        e.preventDefault();
+   const handleLogin = async (e) => {
+    e.preventDefault();
 
-        const email = e.target.email.value;
-        const password = e.target.password.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
 
-        userLogin(email, password)
-            .then((result) => {
-                const user = result.user;
-                setUser(user);
-                navigate('/');
-            })
-            .catch((error) => {
-                console.error(error.message)
-            });
+    try {
+        const result = await userLogin(email, password);
+        const user = result.user;
 
+      
+        await user.reload();
 
+        if (!user.emailVerified) {
+            toast.error("Please verify your email before logging in.", { position: "top-center" });
+            await auth.signOut(); 
+            return;
+        }
+
+        setUser(user);
+        toast.success("Login successful!", { position: "top-center" });
+        navigate('/');
+    } catch (error) {
+        console.error(error.message);
+        toast.error("Please Register", { position: "top-center" }); 
     }
+};
+
 
 
 
@@ -91,7 +102,7 @@ const Login = () => {
                                     <label className="fieldset-label">Password</label>
                                     <input type="password" name='password' className="input" placeholder="Password" required />
 
-                                    <div><a className="link link-hover">Forgot password?</a></div>
+                                  
                                     <button className="btn btn-warning mt-4">Login</button>
                                 </fieldset>
 

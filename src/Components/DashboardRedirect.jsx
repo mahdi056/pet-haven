@@ -10,7 +10,7 @@ const DashboardRedirect = () => {
 
   useEffect(() => {
     if (user?.email) {
-      axios.get('https://pet-haven-server-mu.vercel.app/users')
+      axios.get('http://localhost:5000/users')
         .then(res => {
           const currentUser = res.data.find(u => u.email === user.email);
           if (currentUser) {
@@ -28,7 +28,7 @@ const DashboardRedirect = () => {
     return <Navigate to="/dashboard/users" replace />;
   }
 
-  // default to user
+  
   return <Navigate to="/dashboard/addpet" replace />;
 };
 
