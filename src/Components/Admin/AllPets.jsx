@@ -49,17 +49,7 @@ const AllPets = () => {
     }
   };
 
-  const handleStatusToggle = async (id, currentStatus) => {
-    const newStatus = currentStatus === "Adopted" ? "Not Adopted" : "Adopted";
-
-    try {
-      await axios.patch(`http://localhost:5000/petlist/${id}`, { adoptionStatus: newStatus });
-      toast.success("Status updated");
-      fetchPets();
-    } catch (error) {
-      toast.error("Failed to update status");
-    }
-  };
+  
 
   const openUpdateModal = (pet) => {
     setSelectedPet(pet);
@@ -99,7 +89,7 @@ const AllPets = () => {
               <th>Category</th>
               <th>Image</th>
               <th>Added By</th>
-              <th>Status</th>
+             
               <th>Actions</th>
             </tr>
           </thead>
@@ -113,14 +103,9 @@ const AllPets = () => {
                   <img src={pet.image} alt={pet.name} className="w-16 h-16 rounded" />
                 </td>
                 <td>{pet.userEmail}</td>
-                <td>{pet.adoptionStatus || "Not Adopted"}</td>
+                
                 <td className="space-x-2 space-y-2 md:space-y-0">
-                  <button
-                    onClick={() => handleStatusToggle(pet._id, pet.adoptionStatus)}
-                    className="btn btn-sm btn-info"
-                  >
-                    {pet.adoptionStatus === "Adopted" ? "Mark as Not Adopted" : "Mark as Adopted"}
-                  </button>
+                 
                   <button
                     onClick={() => handleDelete(pet._id)}
                     className="btn btn-sm btn-error"

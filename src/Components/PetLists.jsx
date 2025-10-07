@@ -53,7 +53,7 @@ const PetLists = () => {
         <h2 className="text-3xl font-bold text-center mb-8">Available Pets for Adoption</h2>
 
         {/* Search & Filter */}
-        {/* <div className="flex flex-col md:flex-row items-center justify-between mb-8 gap-4">
+        <div className="flex flex-col md:flex-row items-center justify-between mb-8 gap-4">
           <input
             type="text"
             placeholder="Search by name..."
@@ -74,7 +74,7 @@ const PetLists = () => {
             <option value="Fish">Fish</option>
             <option value="Bird">Bird</option>
           </select>
-        </div> */}
+        </div>
 
         {/* Cards */}
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">

@@ -33,9 +33,9 @@ import AllPets from './Components/Admin/AllPets';
 import AllDonations from './Components/Admin/AllDonations';
 import ErrorPage from './Components/ErrorPage';
 import DashboardRedirect from './Components/DashboardRedirect';
-import Blog from './Components/Blog';
-import Payment from './Components/Payment';
+
 import Success from './Components/Success';
+import PrivateRoute from './Components/PrivateRoute';
 
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
 
@@ -74,74 +74,103 @@ const router = createBrowserRouter([
         element: <PetDetails></PetDetails>
       },
       {
-          path: '/blogs',
-          element: <Blog></Blog>
-      },
-      {
-        path: 'payment',
-        element: <Payment></Payment>
-      },
-      {
         path: '/success',
-        element: <Success></Success>
+        element: <PrivateRoute><Success></Success> </PrivateRoute>
       }
     ]
   },
   {
     path: '/dashboard',
-    element: <Dashboard></Dashboard>,
+    element: <PrivateRoute>
+
+      <Dashboard></Dashboard>
+    </PrivateRoute>,
     children: [
       {
-      index: true, 
-      element: <DashboardRedirect></DashboardRedirect>
+        index: true,
+        element: <DashboardRedirect></DashboardRedirect>
       },
       {
-        
+
         path: '/dashboard/addpet',
-        element: <Addpet></Addpet>
+        element: <PrivateRoute>
+
+
+          <Addpet></Addpet>
+        </PrivateRoute>
       },
       {
         path: '/dashboard/myaddedpets',
-        element: <MyAddedpets></MyAddedpets>
+        element: <PrivateRoute>
+
+          <MyAddedpets></MyAddedpets>
+        </PrivateRoute>
       },
       {
         path: '/dashboard/adoptionrequest',
-        element: <AdoptionRequest></AdoptionRequest>
+        element: <PrivateRoute>
+
+          <AdoptionRequest></AdoptionRequest>
+        </PrivateRoute>
       },
       {
         path: '/dashboard/createdonationcampaign',
-        element: <CreateDonationCampaign></CreateDonationCampaign>
+        element: <PrivateRoute>
+
+          <CreateDonationCampaign></CreateDonationCampaign>
+        </PrivateRoute>
       },
       {
         path: '/dashboard/mydonationcampaigns',
-        element: <MyDonationCampaign></MyDonationCampaign>
+        element: <PrivateRoute>
+
+          <MyDonationCampaign></MyDonationCampaign>
+        </PrivateRoute>
       },
       {
         path: '/dashboard/mydonations',
-        element: <MyDonations></MyDonations>
+        element: <PrivateRoute>
+
+          <MyDonations></MyDonations>
+        </PrivateRoute>
       },
       {
         path: '/dashboard/updatepet/:id',
-        element: <UpdatePet></UpdatePet>
+        element: <PrivateRoute>
+
+          <UpdatePet></UpdatePet>
+        </PrivateRoute>
       },
       {
         path: '/dashboard/edit-donation/:id',
-        element: <EditDonation></EditDonation>
+        element: <PrivateRoute>
+
+          <EditDonation></EditDonation>
+        </PrivateRoute>
       },
-      
+
       {
         path: '/dashboard/users',
-        element: <User></User>
+        element: <PrivateRoute>
+
+          <User></User>
+        </PrivateRoute>
       },
       {
         path: '/dashboard/allpets',
-        element: <AllPets></AllPets>
+        element: <PrivateRoute>
+
+          <AllPets></AllPets>
+        </PrivateRoute>
       },
       {
         path: '/dashboard/alldonations',
-        element: <AllDonations></AllDonations>
+        element: <PrivateRoute>
+
+          <AllDonations></AllDonations>
+        </PrivateRoute>
       }
-      
+
 
     ]
   }
@@ -151,8 +180,8 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
-        <Elements stripe={stripePromise}>
-      <RouterProvider router={router} />
+      <Elements stripe={stripePromise}>
+        <RouterProvider router={router} />
       </Elements>
     </AuthProvider>
   </StrictMode>,

@@ -12,6 +12,9 @@ import { FaHome } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
 
 const Dashboard = () => {
+
+  const isadmin = true;
+
   const { user } = useContext(AuthContext);
   const [currentUserRole, setCurrentUserRole] = useState('');
   useEffect(() => {
@@ -38,7 +41,7 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-gray-50">
       {/* Sidebar */}
-
+      
       {user&& currentUserRole == 'user' &&
         (
           <>
@@ -85,6 +88,7 @@ const Dashboard = () => {
       }
 
       {
+        
         user && currentUserRole == 'admin' && (
           <>
 

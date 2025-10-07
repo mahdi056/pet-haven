@@ -65,7 +65,7 @@ const AllDonations = () => {
         petName: editingCampaign.petName,
         deadline: editingCampaign.deadline,
         userEmail: editingCampaign.userEmail,
-        donatedAmount: editingCampaign.donatedAmount,
+        
       });
       toast.success("Campaign updated");
       setEditingCampaign(null);
@@ -206,18 +206,7 @@ const AllDonations = () => {
           />
         </div>
 
-        <div>
-          <label className="block mb-1 text-sm font-medium text-gray-700">Donated Amount</label>
-          <input
-            type="number"
-            value={editingCampaign.donatedAmount}
-            onChange={(e) =>
-              setEditingCampaign({ ...editingCampaign, donatedAmount: e.target.value })
-            }
-            placeholder="Donated Amount"
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
-          />
-        </div>
+        
       </div>
 
       {/* Modal Footer */}

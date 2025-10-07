@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 import axios from "axios";
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+
 import Swal from "sweetalert2";
 import { AuthContext } from "./Provider/AuthProvider";
 import { toast, ToastContainer } from "react-toastify";
@@ -13,15 +13,29 @@ const DonationDetails = () => {
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [donationAmount, setDonationAmount] = useState("");
-  const [clientSecret, setClientSecret] = useState("");
-  const stripe = useStripe();
-  const elements = useElements();
+  const [users, setUsers] = useState([]);
+  const [creator, setCreator] = useState(null);
+
 
   useEffect(() => {
     axios.get(`http://localhost:5000/donation-campaign/${id}`)
       .then(res => setCampaign(res.data))
       .catch(err => console.error("Error fetching campaign details:", err));
   }, [id]);
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/users")
+      .then(res => setUsers(res.data))
+      .catch(err => console.error(err));
+  }, []);
+
+
+  useEffect(() => {
+    if (campaign && users.length > 0) {
+      const matchedUser = users.find(u => u.email === campaign.userEmail);
+      setCreator(matchedUser || null);
+    }
+  }, [campaign, users]);
 
 
 
@@ -32,7 +46,7 @@ const DonationDetails = () => {
     const current = Number(campaign.donatedAmount || 0);
     const newDonation = Number(donationAmount);
 
-    
+
 
 
 
@@ -48,7 +62,7 @@ const DonationDetails = () => {
 
     const deadline = new Date(campaign.deadline);
     const today = new Date();
-    
+
 
     if (today > deadline) {
       Swal.fire(
@@ -63,9 +77,14 @@ const DonationDetails = () => {
     const payload = {
       amount: newDonation,
       name: user.displayName || "Anonymous Donor",
-      email: user.email || "donor@example.com",
+      email: user.email || "donor@gmail.com",
       phone: "01707226784",
+      campaignId: campaign._id,
+      petImage: campaign.petImage,
+      petName: campaign.petName
     }
+
+    console.log(payload);
 
     try {
       const res = await axios.post("http://localhost:5000/api/payment", payload, {
@@ -78,7 +97,7 @@ const DonationDetails = () => {
       if (res.data && res.data.url) {
         console.log("Redirecting user to payment gateway:", res.data.url);
 
- 
+
         window.location.href = res.data.url;
       } else {
         console.error("No gateway URL returned from backend.", res.data);
@@ -93,7 +112,7 @@ const DonationDetails = () => {
 
 
 
-   
+
   };
 
 
@@ -108,18 +127,29 @@ const DonationDetails = () => {
         className="w-full h-64 object-contain rounded-md mb-4"
       />
       <h2 className="text-2xl font-bold mb-2">{campaign.petName}</h2>
-      <p><strong>Max Donation Amount:</strong> ৳{campaign.maxAmount}</p>
-      <p><strong>Donated Amount:</strong> ৳{campaign.donatedAmount || 0}</p>
+      <p><strong>Max Donation Amount:</strong> {campaign.maxAmount}</p>
+      <p><strong>Donated Amount:</strong> {campaign.donatedAmount || 0}</p>
       <p><strong>Donation Deadline:</strong> {new Date(campaign.deadline).toLocaleDateString()}</p>
       <p className="mt-4"><strong>Description:</strong></p>
       <p>{campaign.description}</p>
       <p className="mt-4 text-sm text-gray-500">Created At: {new Date(campaign.createdAt).toLocaleString()}</p>
 
+      {creator && (
+
+        <div className="mt-6 p-4 border rounded bg-gray-50">
+          <h3 className="text-lg font-semibold mb-2">Creator Information</h3>
+          <p><strong>Name:</strong> {creator.name || "N/A"}</p>
+          <p><strong>Email:</strong> {creator.email}</p>
+          {creator.phone && <p><strong>Phone:</strong> {creator.phone}</p>}
+          {creator.city && <p><strong>City:</strong> {creator.city}</p>}
+          {creator.country && <p><strong>Country:</strong> {creator.country}</p>}
+        </div>
+      )}
       <div className="flex gap-x-4">
 
         <div> {
           user && user.emailVerified ? (<button
-            // onClick={() => setIsModalOpen(true)}
+            onClick={() => setIsModalOpen(true)}
             className="mt-6 btn btn-warning text-black px-4 py-2 rounded"
             disabled={campaign.status == 'Paused' || campaign.paused == true}
           >

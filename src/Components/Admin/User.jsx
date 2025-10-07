@@ -27,6 +27,21 @@ const User = () => {
     }
   };
 
+  // Add handler
+  const handleRemoveAdmin = async (userId) => {
+    try {
+      const res = await axios.put(`http://localhost:5000/users/remove-admin/${userId}`);
+      if (res.data.modifiedCount > 0) {
+        toast.info("User removed from Admin!");
+        setUsers(prev => prev.map(user => user._id === userId ? { ...user, role: 'user' } : user));
+      }
+    } catch (err) {
+      toast.error("Failed to remove admin role.");
+      console.error(err);
+    }
+  };
+
+
   return (
     <div className="p-4">
       <h2 className="text-xl font-bold mb-4">All Registered Users</h2>
@@ -38,6 +53,9 @@ const User = () => {
               <th>Profile</th>
               <th>Name</th>
               <th>Email</th>
+              <th>Phone</th>
+              <th>City</th>
+              <th>Country</th> 
               <th>Role</th>
               <th>Make Admin</th>
             </tr>
@@ -48,20 +66,28 @@ const User = () => {
                 <td>{index + 1}</td>
                 <td>
                   {
-                    user.image ? ( <img src={user?.image} alt="User" className="w-10 h-10 rounded-full" />)
-                    :
-                    ( 
-                      <RxAvatar className="w-8 h-8"></RxAvatar>
-                    )
+                    user.image ? (<img src={user?.image} alt="User" className="w-10 h-10 rounded-full" />)
+                      :
+                      (
+                        <RxAvatar className="w-8 h-8"></RxAvatar>
+                      )
                   }
-                 
+
                 </td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
+                <td>{user.phone}</td>
+                <td>{user.city}</td>
+                <td>{user.country}</td>
                 <td>{user.role || 'user'}</td>
                 <td>
                   {user.role === 'admin' ? (
-                    <span className="text-green-600 font-semibold">Admin</span>
+                    <button
+                      onClick={() => handleRemoveAdmin(user._id)}
+                      className="btn btn-sm btn-error"
+                    >
+                      Remove Admin
+                    </button>
                   ) : (
                     <button
                       onClick={() => handleMakeAdmin(user._id)}
@@ -71,6 +97,7 @@ const User = () => {
                     </button>
                   )}
                 </td>
+
               </tr>
             ))}
           </tbody>

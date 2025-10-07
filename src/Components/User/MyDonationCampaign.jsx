@@ -95,7 +95,7 @@ const MyDonationCampaign = () => {
               <ul className="divide-y divide-gray-200">
                 {selectedDonors.map((donor, idx) => (
                   <li key={idx} className="py-2">
-                    <p><strong>Email:</strong> {donor.donorEmail}</p>
+                    <p><strong>Email:</strong> {donor.email}</p>
                     <p><strong>Amount:</strong> ৳{donor.amount}</p>
                   </li>
                 ))}

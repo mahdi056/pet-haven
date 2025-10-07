@@ -34,8 +34,8 @@ const DonationCampaigns = () => {
             <h3 className="text-lg font-semibold mb-2">
               {campaign.petName || "Untitled Pet"}
             </h3>
-            <p><strong>Max Donation:</strong> ${campaign.maxAmount}</p>
-            <p><strong>Donated Amount:</strong> ${campaign.donatedAmount || 0}</p>
+            <p><strong>Max Donation:</strong> {campaign.maxAmount}</p>
+            <p><strong>Donated Amount:</strong> {campaign.donatedAmount || 0}</p>
             <Link
               to={`/donation-details/${campaign._id}`}
               className="btn btn-sm btn-warning w-full mt-6"

@@ -10,6 +10,7 @@ const CreateDonationCampaign = () => {
 
   const [formData, setFormData] = useState({
     petImage: null,
+    petName: '',
     maxAmount: '',
     deadline: '',
     description: '',
@@ -40,7 +41,9 @@ const CreateDonationCampaign = () => {
 
       const imgbbRes = await axios.post(
         `https://api.imgbb.com/1/upload?key=${imgbbApiKey}`,
-        imgForm
+        imgForm,
+
+        {timeout: 20000}
       );
 
       const imageUrl = imgbbRes.data.data.url;
@@ -49,7 +52,7 @@ const CreateDonationCampaign = () => {
       const campaignData = {
         petImage: imageUrl,
         maxAmount: parseFloat(formData.maxAmount),
-        petName: formData.name,
+        petName: formData.petName,
         deadline: new Date(formData.deadline),
         description: formData.description,
         userEmail: user?.email,
@@ -98,8 +101,8 @@ const CreateDonationCampaign = () => {
         <label>Pet Name</label>
         <input
           type="text"
-          name="name"
-          value={formData.name}
+          name="petName"
+          value={formData.petName}
           onChange={handleChange}
           required
           className="input input-bordered w-full"
