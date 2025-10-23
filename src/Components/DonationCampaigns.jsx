@@ -8,7 +8,7 @@ const DonationCampaigns = () => {
   useEffect(() => {
     axios.get("http://localhost:5000/donation-campaign")
       .then((res) => {
-        // Sort by createdAt in descending order
+        
         const sorted = res.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         setCampaigns(sorted);
       })

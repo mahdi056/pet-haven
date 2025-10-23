@@ -26,7 +26,6 @@ import MyDonations from './Components/User/MyDonations';
 import UpdatePet from './Components/User/UpdatePet';
 import DonationDetails from './Components/DonationDetails';
 import { loadStripe } from '@stripe/stripe-js';
-import { Elements } from '@stripe/react-stripe-js';
 import EditDonation from './Components/User/EditDonation';
 import User from './Components/Admin/User';
 import AllPets from './Components/Admin/AllPets';
@@ -180,9 +179,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
-      <Elements stripe={stripePromise}>
+  
         <RouterProvider router={router} />
-      </Elements>
+      
     </AuthProvider>
   </StrictMode>,
 )

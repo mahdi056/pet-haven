@@ -8,45 +8,15 @@ import { sendEmailVerification } from 'firebase/auth';
 
 const Register = () => {
 
-    const { createUser, setUser, updateUserProfile, SignInwithGoogle } = useContext(AuthContext);
+    const { createUser, setUser, updateUserProfile } = useContext(AuthContext);
     const [passworderror, setPassworderror] = useState("");
     const [emailerror, setEmailerror] = useState("");
     const [phoneerror, setPhoneerror] = useState("");
     const navigate = useNavigate();
 
 
-    const handleGoogleSignIn = () => {
-        SignInwithGoogle()
-            .then(async (result) => {
-                const user = result.user;
-                setUser(user);
-
-
-                const userInfo = {
-                    name: user.displayName,
-                    email: user.email,
-                    image: user.photoURL
-                };
-
-                try {
-                    const res = await axios.post('http://localhost:5000/users', userInfo);
-                    if (res.data.insertedId) {
-                        toast.success("Google Sign-Up Successful!", { position: "top-center" });
-                        navigate('/');
-                    } else if (res.data.message === "User already exists") {
-                        toast.info("Welcome back!", { position: "top-center" });
-                        navigate('/');
-                    }
-                } catch (error) {
-                    console.error(error);
-                    toast.error("Google Sign-In failed to save user.", { position: "top-center" });
-                }
-            })
-            .catch((error) => {
-                console.error(error);
-                toast.error("Google Sign-In failed.", { position: "top-center" });
-            });
-    }
+    
+    
 
 
     const handleSubmit = async (e) => {
@@ -80,8 +50,8 @@ const Register = () => {
 
 
         if (!passwordRegex.test(password)) {
-            setPassworderror("Password must include at least one uppercase letter, a special character, and be at least 6 characters long.");
-            toast.error("Invalid Password Format", { position: 'top-center' });
+            setPassworderror("Password must include at least one uppercase letter, a number, a special character, and be at least 6 characters long.");
+           
             return;
         }
         if (!emailRegex.test(email)) {
@@ -162,17 +132,10 @@ const Register = () => {
                                 <span className="label-text">Email</span>
                             </label>
                             <input name="email" type="email" className="input input-bordered w-full" placeholder="Email" required />
+                            
                             {emailerror && <p className='text-red-500 text-sm'>{emailerror}</p>}
 
-                            <label className="label">
-                                <span className="label-text">Password</span>
-                            </label>
-                            <input name="password" type="password" className="input input-bordered w-full" placeholder="Password" required />
-
-                            <label className="label">
-                                <span className="label-text">Confirm Password</span>
-                            </label>
-                            <input name="conpassword" type="password" className="input input-bordered w-full" placeholder="Confirm Password" required />
+                           
 
                             <label className="label">
                                 <span className="label-text">Phone Number</span>
@@ -208,14 +171,27 @@ const Register = () => {
                             </label>
                             <input name="country" type="text" className="input input-bordered w-full" placeholder="Country" required />
 
+
+                             <label className="label">
+                                <span className="label-text">Password</span>
+                            </label>
+                            <input name="password" type="password" className="input input-bordered w-full" placeholder="Password" required />
+
+                            {passworderror && <p className='text-red-500 text-sm'>{passworderror}</p>}
+
+                            <label className="label">
+                                <span className="label-text">Confirm Password</span>
+                            </label>
+                            <input name="conpassword" type="password" className="input input-bordered w-full" placeholder="Confirm Password" required />
+
                             <button type="submit" className="btn btn-warning mt-4 w-full">Register</button>
 
 
                             <div className='divider'></div>
 
-                            <button onClick={handleGoogleSignIn} className='btn btn-outline btn-warning w-full'>Google Sign In</button>
+                            
 
-                            <p className='text-center mt-4'>Already have an account? <Link to='/login'><button className='btn btn-sm'>Login</button></Link></p>
+                            <p className='text-center mt-4'>Already have an account? <Link to='/login'><button className='btn btn-sm btn-outline btn-warning'>Login</button></Link></p>
                         </form>
                     </div>
                 </div>

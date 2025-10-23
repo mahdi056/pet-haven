@@ -6,8 +6,7 @@ import { RxAvatar } from "react-icons/rx";
 const Header = () => {
   const { user, SignOut } = useContext(AuthContext);
 
-console.log(user?.displayName);
-console.log(user?.email);
+
   return (
     <div>
       <div className="navbar bg-base-100 shadow-sm">
@@ -34,7 +33,7 @@ console.log(user?.email);
           </div>
           <Link to='/'><div className='flex items-center'>
             <img src={petLogo} alt="Pet Haven Logo" />
-            <a className="btn btn-ghost text-2xl text-warning font-bold hidden md:block">Pet Haven</a>
+            <p className="btn btn-ghost text-2xl text-warning font-bold hidden md:block">Pet Haven</p>
           </div></Link>
         </div>
 

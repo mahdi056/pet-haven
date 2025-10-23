@@ -13,7 +13,7 @@ import { FaUsers } from "react-icons/fa";
 
 const Dashboard = () => {
 
-  const isadmin = true;
+
 
   const { user } = useContext(AuthContext);
   const [currentUserRole, setCurrentUserRole] = useState('');

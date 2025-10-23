@@ -84,7 +84,7 @@ const DonationDetails = () => {
       petName: campaign.petName
     }
 
-    console.log(payload);
+    
 
     try {
       const res = await axios.post("http://localhost:5000/api/payment", payload, {
