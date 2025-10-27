@@ -12,6 +12,7 @@ const Register = () => {
     const [passworderror, setPassworderror] = useState("");
     const [emailerror, setEmailerror] = useState("");
     const [phoneerror, setPhoneerror] = useState("");
+    const [nameerror, setNameerror] = useState("");
     const navigate = useNavigate();
 
 
@@ -41,7 +42,8 @@ const Register = () => {
 
 
         const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{7,}$/;
-        const emailRegex = /^(?!.*\.\.)(?!.*\.$)(?!\.)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*\.[a-zA-Z]{2,}$/;
+        const emailRegex = /^[a-zA-Z][a-zA-Z0-9._%+-]{5,63}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const nameRegex =  /^[A-Za-z ]+$/;
 
         if(phone.length !== 14){
             setPhoneerror("Please Enter a valid Phone Number")
@@ -54,6 +56,13 @@ const Register = () => {
            
             return;
         }
+
+        if(!nameRegex.test(name)){
+            setNameerror("Invalid Name")
+            return;
+        }
+
+
         if (!emailRegex.test(email)) {
             setEmailerror("Invalid Email Format")
             return;
@@ -73,12 +82,12 @@ const Register = () => {
             const result = await createUser(email, password);
             const user = result.user;
 
-            await sendEmailVerification(user);
-            toast.info("Verification email sent! Please check your inbox.", {
-                position: "top-center",
-                autoClose: 2000,
-                onClose: () => navigate("/login")
-            });
+            // await sendEmailVerification(user);
+            // toast.info("Verification email sent! Please check your inbox.", {
+            //     position: "top-center",
+            //     autoClose: 2000,
+            //     onClose: () => navigate("/login")
+            // });
 
 
             await updateUserProfile({
@@ -90,20 +99,21 @@ const Register = () => {
             
 
 
-            const userInfo = { name, email, phone, city, country };
+            // const userInfo = { name, email, phone, city, country };
 
-            const res = await axios.post('http://localhost:5000/users', userInfo);
+            // const res = await axios.post('http://localhost:5000/users', userInfo);
 
-            if (res.data.insertedId) {
+            // if (res.data.insertedId) {
              
-                e.target.reset();
-                navigate("/login");
-            }
+            //     e.target.reset();
+            //     navigate("/login");
+            // }
+            alert("Registration Successfull")
 
         }
         catch (error) {
             console.error(error);
-            toast.error("Registration failed!", { position: "top-center" });
+            toast.error("This Email is Already Taken", { position: "top-center" });
         }
     }
 
@@ -127,6 +137,8 @@ const Register = () => {
                                 <span className="label-text">Name</span>
                             </label>
                             <input name="name" type="text" className="input input-bordered w-full" placeholder="Name" required />
+
+                            {nameerror && <p className='text-red-500 text-sm'>{nameerror}</p>}
 
                             <label className="label">
                                 <span className="label-text">Email</span>

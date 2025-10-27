@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 const CreateDonationCampaign = () => {
-     const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const [formData, setFormData] = useState({
     petImage: null,
@@ -37,18 +37,18 @@ const CreateDonationCampaign = () => {
 
       const imgForm = new FormData();
       imgForm.append('image', formData.petImage);
-        const imgbbApiKey = import.meta.env.VITE_IMAGE_HOSTING_KEY; 
+      const imgbbApiKey = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 
       const imgbbRes = await axios.post(
         `https://api.imgbb.com/1/upload?key=${imgbbApiKey}`,
         imgForm,
 
-        {timeout: 20000}
+        { timeout: 20000 }
       );
 
       const imageUrl = imgbbRes.data.data.url;
 
-   
+
       const campaignData = {
         petImage: imageUrl,
         maxAmount: parseFloat(formData.maxAmount),
@@ -80,79 +80,86 @@ const CreateDonationCampaign = () => {
     }
   };
 
-    return (
-        <div>
+  return (
+    <div>
 
-            <form onSubmit={handleSubmit} className="space-y-4 p-6 bg-white shadow-md rounded-md">
+
+
+      <form onSubmit={handleSubmit} className="space-y-4 p-6 bg-white shadow-md rounded-md">
         <ToastContainer></ToastContainer>
-      <div>
-        <label>Pet Image (Upload)</label>
-        <input
-          type="file"
-          name="petImage"
-          accept="image/*"
-          onChange={handleChange}
-          required
-          className="file-input file-input-bordered w-full"
-        />
-      </div>
 
-       <div>
-        <label>Pet Name</label>
-        <input
-          type="text"
-          name="petName"
-          value={formData.petName}
-          onChange={handleChange}
-          required
-          className="input input-bordered w-full"
-        />
-      </div>
-
-      <div>
-        <label>Maximum Donation Amount</label>
-        <input
-          type="number"
-          name="maxAmount"
-          value={formData.maxAmount}
-          onChange={handleChange}
-          required
-          className="input input-bordered w-full"
-        />
-      </div>
-
-     
-
-      <div>
-        <label>Last Date of Donation</label>
-        <input
-          type="date"
-          name="deadline"
-          value={formData.deadline}
-          onChange={handleChange}
-          required
-          className="input input-bordered w-full"
-        />
-      </div>
-
-      <div>
-        <label>Description</label>
-        <textarea
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-          required
-          className="textarea textarea-bordered w-full"
-        />
-      </div>
-
-      <button type="submit" className="btn btn-warning w-full">
-        Submit Campaign
-      </button>
-    </form>
-            
+        <div>
+          <label>Pet Image (Upload)</label>
+          <input
+            type="file"
+            name="petImage"
+            accept="image/*"
+            onChange={handleChange}
+            required
+            className="file-input file-input-bordered w-full"
+          />
         </div>
-    );
+
+
+
+
+
+        <div>
+          <label>Pet Name</label>
+          <input
+            type="text"
+            name="petName"
+            value={formData.petName}
+            onChange={handleChange}
+            required
+            className="input input-bordered w-full"
+          />
+        </div>
+
+        <div>
+          <label>Maximum Donation Amount</label>
+          <input
+            type="number"
+            name="maxAmount"
+            value={formData.maxAmount}
+            onChange={handleChange}
+            required
+            className="input input-bordered w-full"
+          />
+        </div>
+
+
+
+        <div>
+          <label>Last Date of Donation</label>
+          <input
+            type="date"
+            name="deadline"
+            value={formData.deadline}
+            onChange={handleChange}
+            required
+            className="input input-bordered w-full"
+          />
+        </div>
+
+        <div>
+          <label>Description</label>
+          <textarea
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            required
+            className="textarea textarea-bordered w-full"
+          />
+        </div>
+
+        <button type="submit" className="btn btn-warning w-full">
+          Submit Campaign
+        </button>
+      </form>
+
+    </div>
+  );
 };
 
 export default CreateDonationCampaign;

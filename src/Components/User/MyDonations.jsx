@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
-import { AuthContext } from '../Provider/AuthProvider'; // adjust path as needed
+import { AuthContext } from '../Provider/AuthProvider'; 
 
 const MyDonations = () => {
-  const { user } = useContext(AuthContext); // assuming user.email is available
+  const { user } = useContext(AuthContext); 
   const [donations, setDonations] = useState([]);
 
   useEffect(() => {

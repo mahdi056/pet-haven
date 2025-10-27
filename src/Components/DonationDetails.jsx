@@ -92,7 +92,7 @@ const DonationDetails = () => {
         timeout: 20000,
       });
 
-      console.log("Backend /api/payment response:", res.data);
+      // console.log("Backend /api/payment response:", res.data);
 
       if (res.data && res.data.url) {
         console.log("Redirecting user to payment gateway:", res.data.url);
@@ -171,6 +171,7 @@ const DonationDetails = () => {
 
       </div>
 
+     
 
 
       {/* Modal */}
@@ -192,9 +193,7 @@ const DonationDetails = () => {
                 />
               </label>
 
-              {/* <div className="mb-4 mt-2">
-                <CardElement options={{ hidePostalCode: true }} />
-              </div> */}
+            
 
               <button
                 type="submit"

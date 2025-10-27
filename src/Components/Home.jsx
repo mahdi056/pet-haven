@@ -112,7 +112,7 @@ const Home = () => {
             Every Pet Deserves a Loving Home
           </h2>
           <p className="text-lg text-gray-600 mb-6">
-            By adopting a pet, you're not just saving a life — you're gaining a loyal companion. Join us in making a difference. Love begins with adoption.
+            By adopting a pet, you're not just saving a life, you're gaining a loyal companion. Join us in making a difference. Love begins with adoption.
           </p>
           <Link to="/petlist">
             <button className="btn btn-warning text-white px-6 py-3 rounded-md text-lg shadow-md hover:shadow-lg transition">
@@ -129,11 +129,11 @@ const Home = () => {
       <div className="max-w-5xl mx-auto px-4 text-center">
         <h2 className="text-4xl font-bold text-gray-800 mb-6">About Pet Haven</h2>
         <p className="text-lg text-gray-600 leading-relaxed">
-          <span className="font-semibold text-orange-500">Pet Haven</span> is more than just a pet adoption platform — it's a community built on love, compassion, and second chances. 
+          <span className="font-semibold text-orange-500">Pet Haven</span> is more than just a pet adoption platform. It's a community built on love, compassion, and second chances. 
           Our mission is to connect rescued pets with caring families and individuals who are ready to offer them a forever home.
           <br /><br />
           Through our platform, you can explore available pets, request adoptions, and even contribute to ongoing donation campaigns to support animals in need.
-          Whether you're looking to adopt or support others who do — Pet Haven makes it easy to make a real difference.
+          Whether you're looking to adopt or support others who do, Pet Haven makes it easy to make a real difference.
         </p>
       </div>
     </section>

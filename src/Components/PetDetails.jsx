@@ -61,7 +61,7 @@ const PetDetails = () => {
       <img
         src={pet.image}
         alt={pet.name}
-        className="w-full h-96 rounded-lg mb-6"
+        className="w-full h-96 rounded-lg mb-6 cover"
       />
       <p className="mt-12"><strong>Age:</strong> {pet.age}</p>
       <p><strong>Category:</strong> {pet.category}</p>
@@ -92,10 +92,10 @@ const PetDetails = () => {
       {/* Modal */}
      {showModal && (
   <div className="fixed inset-0 z-50 flex justify-center items-center">
-    {/* Background overlay with opacity */}
+   
     <div className="absolute inset-0 bg-black opacity-50"></div> 
 
-    {/* Modal content */}
+   
     <div className="relative bg-white p-6 rounded-lg shadow-lg w-full max-w-md z-50">
       <h3 className="text-xl font-semibold mb-4">Adopt {pet.name}</h3>
       <form onSubmit={handleSubmit}>
