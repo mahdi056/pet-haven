@@ -16,8 +16,8 @@ const Register = () => {
     const navigate = useNavigate();
 
 
-    
-    
+
+
 
 
     const handleSubmit = async (e) => {
@@ -27,12 +27,12 @@ const Register = () => {
         const email = e.target.email.value;
         const password = e.target.password.value;
         const conpassword = e.target.conpassword.value;
-        const number = e.target.phone.value;
+        const phone = e.target.phone.value;
         const city = e.target.city.value;
-        const country = e.target.country.value;
+        
+        
 
-        const countryCode = "+880";
-        const phone = countryCode + number;
+   
 
 
 
@@ -43,9 +43,9 @@ const Register = () => {
 
         const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{7,}$/;
         const emailRegex = /^[a-zA-Z][a-zA-Z0-9._%+-]{5,63}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        const nameRegex =  /^[A-Za-z ]+$/;
+        const nameRegex = /^[A-Za-z ]+$/;
 
-        if(phone.length !== 14){
+        if (phone.length !== 11) {
             setPhoneerror("Please Enter a valid Phone Number")
             return;
         }
@@ -53,11 +53,11 @@ const Register = () => {
 
         if (!passwordRegex.test(password)) {
             setPassworderror("Password must include at least one uppercase letter, a number, a special character, and be at least 6 characters long.");
-           
+
             return;
         }
 
-        if(!nameRegex.test(name)){
+        if (!nameRegex.test(name)) {
             setNameerror("Invalid Name")
             return;
         }
@@ -82,12 +82,12 @@ const Register = () => {
             const result = await createUser(email, password);
             const user = result.user;
 
-            // await sendEmailVerification(user);
-            // toast.info("Verification email sent! Please check your inbox.", {
-            //     position: "top-center",
-            //     autoClose: 2000,
-            //     onClose: () => navigate("/login")
-            // });
+            await sendEmailVerification(user);
+            toast.info("Verification email sent! Please check your inbox.", {
+                position: "top-center",
+                autoClose: 2000,
+                onClose: () => navigate("/login")
+            });
 
 
             await updateUserProfile({
@@ -96,19 +96,19 @@ const Register = () => {
             });
 
             setUser({ ...user, displayName: name });
-            
 
 
-            // const userInfo = { name, email, phone, city, country };
 
-            // const res = await axios.post('http://localhost:5000/users', userInfo);
+            const userInfo = { name, email, phone, city };
 
-            // if (res.data.insertedId) {
-             
-            //     e.target.reset();
-            //     navigate("/login");
-            // }
-            alert("Registration Successfull")
+            const res = await axios.post('http://localhost:5000/users', userInfo);
+
+            if (res.data.insertedId) {
+
+                e.target.reset();
+                navigate("/login");
+            }
+
 
         }
         catch (error) {
@@ -144,53 +144,41 @@ const Register = () => {
                                 <span className="label-text">Email</span>
                             </label>
                             <input name="email" type="email" className="input input-bordered w-full" placeholder="Email" required />
-                            
+
                             {emailerror && <p className='text-red-500 text-sm'>{emailerror}</p>}
 
-                           
+
 
                             <label className="label">
                                 <span className="label-text">Phone Number</span>
                             </label>
-                            <div className="flex">
+                            <input
+                                name="phone"
+                                type="tel"
+                                pattern='[0-9]{11}'
+                                className="input input-bordered flex-1"
+                                placeholder="Enter 11 Digit Phone Number"
+                                required
+                            />
 
-                                <input
-                                    type="text"
-                                    value="+880"
-                                    readOnly
-                                    className="input input-bordered w-20 mr-2 bg-gray-100 cursor-not-allowed"
-                                />
 
-                                <input
-                                    name="phone"
-                                    type="tel"
-                                    pattern='[0-9]{10}'
-                                    className="input input-bordered flex-1"
-                                    placeholder="Enter phone number"
-                                    required
-                                />
-                            </div>
-                            
-                             {phoneerror && <p className='text-red-500 text-sm'>{phoneerror}</p>}
+                            {phoneerror && <p className='text-red-500 text-sm'>{phoneerror}</p>}
 
                             <label className="label">
                                 <span className="label-text">City</span>
                             </label>
                             <input name="city" type="text" className="input input-bordered w-full" placeholder="City" required />
 
+                          
+
+
                             <label className="label">
-                                <span className="label-text">Country</span>
-                            </label>
-                            <input name="country" type="text" className="input input-bordered w-full" placeholder="Country" required />
-
-
-                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
                             <input name="password" type="password" className="input input-bordered w-full" placeholder="Password" required />
 
                             {passworderror && <p className='text-red-500 text-sm'>{passworderror}</p>}
-
+                            <p className='text-sm'>Password must include at least one uppercase letter, a number, a special character and at least 6 characters long.</p>
                             <label className="label">
                                 <span className="label-text">Confirm Password</span>
                             </label>
@@ -201,7 +189,7 @@ const Register = () => {
 
                             <div className='divider'></div>
 
-                            
+
 
                             <p className='text-center mt-4'>Already have an account? <Link to='/login'><button className='btn btn-sm btn-outline btn-warning'>Login</button></Link></p>
                         </form>

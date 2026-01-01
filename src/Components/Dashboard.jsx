@@ -59,6 +59,7 @@ const Dashboard = () => {
                 >
                   <li><NavLink to="/dashboard/addpet" className={navLinkClass}><IoMdAdd></IoMdAdd>Add a Pet</NavLink></li>
                   <li><NavLink to="/dashboard/myaddedpets" className={navLinkClass}><MdPets></MdPets>My Added Pets</NavLink></li>
+                  <li><NavLink to="/dashboard/addproduct" className={navLinkClass}><MdPets></MdPets>Add Products</NavLink></li>
 
                   <li><NavLink to="/dashboard/adoptionrequest" className={navLinkClass}><CiSquareQuestion></CiSquareQuestion>Adoption Request</NavLink></li>
                   <li><NavLink to="/dashboard/createdonationcampaign" className={navLinkClass}><MdCreateNewFolder></MdCreateNewFolder>Create Donation Campaign</NavLink></li>
@@ -73,10 +74,13 @@ const Dashboard = () => {
                 <h2 className="text-xl font-bold text-gray-800 mb-4">Dashboard</h2>
                 <NavLink to="/dashboard/addpet" className={navLinkClass}><IoMdAdd></IoMdAdd>Add a Pet</NavLink>
                 <NavLink to="/dashboard/myaddedpets" className={navLinkClass}><MdPets></MdPets>My Added Pets</NavLink>
+                 <NavLink to="/dashboard/addproduct" className={navLinkClass}><BiDonateHeart></BiDonateHeart>Add Products</NavLink>
                 <NavLink to="/dashboard/adoptionrequest" className={navLinkClass}><CiSquareQuestion></CiSquareQuestion>Adoption Request</NavLink>
                 <NavLink to="/dashboard/createdonationcampaign" className={navLinkClass}><MdCreateNewFolder></MdCreateNewFolder>Create Donation Campaign</NavLink>
                 <NavLink to="/dashboard/mydonationcampaigns" className={navLinkClass}><FaDonate></FaDonate>My Donation Campaigns</NavLink>
                 <NavLink to="/dashboard/mydonations" className={navLinkClass}><BiDonateHeart></BiDonateHeart>My Donations</NavLink>
+               
+
                 <NavLink to="/" className={navLinkClass}><FaHome></FaHome>Home</NavLink>
               </div>
 
@@ -106,6 +110,7 @@ const Dashboard = () => {
                   <li><NavLink to="/dashboard/users" className={navLinkClass}><FaUsers></FaUsers> Users</NavLink></li>
                   <li><NavLink to="/dashboard/allpets" className={navLinkClass}><MdPets></MdPets>All Pets</NavLink></li>
                   <li><NavLink to="/dashboard/alldonations" className={navLinkClass}><BiDonateHeart></BiDonateHeart>All Donations</NavLink></li>
+                  <li><NavLink to="/dashboard/mngproducts" className={navLinkClass}><BiDonateHeart></BiDonateHeart>Manage Products</NavLink></li>
                   <li><NavLink to="/" className={navLinkClass}>Home</NavLink></li>
 
                 </ul>
@@ -117,6 +122,7 @@ const Dashboard = () => {
                 <NavLink to="/dashboard/users" className={navLinkClass}><FaUsers></FaUsers>Users</NavLink>
                 <NavLink to="/dashboard/allpets" className={navLinkClass}><MdPets></MdPets>All Pets</NavLink>
                 <NavLink to="/dashboard/alldonations" className={navLinkClass}><BiDonateHeart></BiDonateHeart>All Donations</NavLink>
+                <NavLink to="/dashboard/mngproducts" className={navLinkClass}><BiDonateHeart></BiDonateHeart>Manage Products</NavLink>
 
                 <NavLink to="/" className={navLinkClass}><FaHome></FaHome>Home</NavLink>
               </div>

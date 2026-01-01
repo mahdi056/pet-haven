@@ -26,6 +26,7 @@ const Header = () => {
               <li><NavLink to='/'>Home</NavLink></li>
               <li><NavLink to='/petlist'>Pet List</NavLink></li>
               <li><NavLink to='/donationcampaigns'>Donation Campaigns</NavLink></li>
+              <li><NavLink to='/petaccesories'>Pet Accesories</NavLink></li>
               {
                user && user.emailVerified && (<li><NavLink to='/dashboard'>Dashboard</NavLink></li>)
               }
@@ -43,7 +44,8 @@ const Header = () => {
             <li><NavLink to='/'>Home</NavLink></li>
             <li><NavLink to='/petlist'>Pet List</NavLink></li>
             <li><NavLink to='/donationcampaigns'>Donation Campaigns</NavLink></li>
-            {/* <li><NavLink to='/payment'>Payment</NavLink></li> */}
+            <li><NavLink to='/petaccesories'>Pet Accesories</NavLink></li>
+            
             
             
             {

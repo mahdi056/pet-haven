@@ -25,7 +25,6 @@ const MyDonationCampaign = () => {
   const handleViewDonors = async (campaignId) => {
     try {
       const res = await axios.get(`http://localhost:5000/donations/${campaignId}`);
-      
       setSelectedDonors(res.data);
       setShowDonorModal(true);
     } catch (err) {

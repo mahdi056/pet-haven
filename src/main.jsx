@@ -25,7 +25,6 @@ import MyDonationCampaign from './Components/User/MyDonationCampaign';
 import MyDonations from './Components/User/MyDonations';
 import UpdatePet from './Components/User/UpdatePet';
 import DonationDetails from './Components/DonationDetails';
-import { loadStripe } from '@stripe/stripe-js';
 import EditDonation from './Components/User/EditDonation';
 import User from './Components/Admin/User';
 import AllPets from './Components/Admin/AllPets';
@@ -35,8 +34,11 @@ import DashboardRedirect from './Components/DashboardRedirect';
 
 import Success from './Components/Success';
 import PrivateRoute from './Components/PrivateRoute';
+import Addproduct from './Components/User/Addproduct';
+import MngProducts from './Components/Admin/MngProducts';
+import PetAccesories from './Components/PetAccesories';
 
-const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
+
 
 const router = createBrowserRouter([
   {
@@ -75,6 +77,10 @@ const router = createBrowserRouter([
       {
         path: '/success',
         element: <PrivateRoute><Success></Success> </PrivateRoute>
+      },
+      {
+        path: '/petaccesories',
+        element: <PetAccesories></PetAccesories>
       }
     ]
   },
@@ -168,6 +174,20 @@ const router = createBrowserRouter([
 
           <AllDonations></AllDonations>
         </PrivateRoute>
+      },
+      {
+        path: '/dashboard/addproduct',
+        element: <PrivateRoute>
+          <Addproduct></Addproduct>
+        </PrivateRoute>
+      },
+      {
+        path: '/dashboard/mngproducts',
+        element: <PrivateRoute>
+
+
+          <MngProducts></MngProducts>
+        </PrivateRoute> 
       }
 
 

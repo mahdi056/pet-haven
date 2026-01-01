@@ -3,10 +3,16 @@ import banner from '../assets/banner.jpg'
 import { FaCat, FaDog, FaFish, FaPaw } from 'react-icons/fa';
 import { GiRabbit } from 'react-icons/gi';
 import adoptPet from '../assets/adopt-pet.jpg'
+import { useContext } from 'react';
+import { AuthContext } from './Provider/AuthProvider';
 
 
 
 const Home = () => {
+
+  const {user} = useContext(AuthContext);
+
+  
  
     const categories = [
         { name: 'Cats', icon: <FaCat size={30} /> },

@@ -55,7 +55,6 @@ const User = () => {
               <th>Email</th>
               <th>Phone</th>
               <th>City</th>
-              <th>Country</th> 
               <th>Role</th>
               <th>Make Admin</th>
             </tr>
@@ -78,7 +77,6 @@ const User = () => {
                 <td>{user.email}</td>
                 <td>{user.phone}</td>
                 <td>{user.city}</td>
-                <td>{user.country}</td>
                 <td>{user.role || 'user'}</td>
                 <td>
                   {user.role === 'admin' ? (

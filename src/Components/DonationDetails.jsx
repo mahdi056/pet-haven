@@ -16,10 +16,13 @@ const DonationDetails = () => {
   const [users, setUsers] = useState([]);
   const [creator, setCreator] = useState(null);
 
+  console.log(user.email);
 
   useEffect(() => {
     axios.get(`http://localhost:5000/donation-campaign/${id}`)
-      .then(res => setCampaign(res.data))
+      .then(res => {
+        console.log(res.data);
+        setCampaign(res.data)})
       .catch(err => console.error("Error fetching campaign details:", err));
   }, [id]);
 
