@@ -37,6 +37,7 @@ import PrivateRoute from './Components/PrivateRoute';
 import Addproduct from './Components/User/Addproduct';
 import MngProducts from './Components/Admin/MngProducts';
 import PetAccesories from './Components/PetAccesories';
+import Myaddedproducts from './Components/User/Myaddedproducts';
 
 
 
@@ -188,6 +189,10 @@ const router = createBrowserRouter([
 
           <MngProducts></MngProducts>
         </PrivateRoute> 
+      },
+      {
+        path: '/dashboard/myaddedproducts',
+        element: <Myaddedproducts></Myaddedproducts>
       }
 
 

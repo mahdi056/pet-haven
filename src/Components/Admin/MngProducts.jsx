@@ -25,9 +25,18 @@ const MngProducts = () => {
   };
 
   const handleReject = async (id) => {
-    await axios.delete(`http://localhost:5000/products/${id}`);
+    await axios.patch(`http://localhost:5000/products/reject/${id}`)
     fetchProducts();
     toast.error("Product Rejected", {
+      position: 'top-center',
+    autoClose: 2000
+      })
+  };
+
+  const handleDelete = async (id) => {
+    await axios.delete(`http://localhost:5000/products/${id}`);
+    fetchProducts();
+    toast.error("Product Deleted", {
         position: 'top-center',
         autoClose: 2000
     })
@@ -66,16 +75,23 @@ const MngProducts = () => {
                 <button
                   onClick={() => handleApprove(product._id)}
                   className="btn btn-success btn-sm"
-                  disabled={product.approve === "yes"}
+                  disabled={product.approve === "Accepted"}
                 >
                   Accept
                 </button>
-
                 <button
                   onClick={() => handleReject(product._id)}
-                  className="btn btn-error btn-sm"
+                  className="btn bg-orange-500 btn-sm"
+                  disabled={product.approve === "Rejected"}
                 >
                   Reject
+                </button>
+
+                <button
+                  onClick={() => handleDelete(product._id)}
+                  className="btn btn-error btn-sm"
+                >
+                  Delete
                 </button>
               </div>
             </div>

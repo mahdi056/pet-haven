@@ -10,6 +10,7 @@ import { FaDonate } from "react-icons/fa";
 import { BiDonateHeart } from "react-icons/bi";
 import { FaHome } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
+import { AiFillProduct } from "react-icons/ai";
 
 const Dashboard = () => {
 
@@ -42,7 +43,7 @@ const Dashboard = () => {
     <div className="min-h-screen flex flex-col md:flex-row bg-gray-50">
       {/* Sidebar */}
       
-      {user&& currentUserRole == 'user' &&
+      {user && currentUserRole == 'user' &&
         (
           <>
 
@@ -59,7 +60,7 @@ const Dashboard = () => {
                 >
                   <li><NavLink to="/dashboard/addpet" className={navLinkClass}><IoMdAdd></IoMdAdd>Add a Pet</NavLink></li>
                   <li><NavLink to="/dashboard/myaddedpets" className={navLinkClass}><MdPets></MdPets>My Added Pets</NavLink></li>
-                  <li><NavLink to="/dashboard/addproduct" className={navLinkClass}><MdPets></MdPets>Add Products</NavLink></li>
+                  <li><NavLink to="/dashboard/addproduct" className={navLinkClass}><IoMdAdd></IoMdAdd>Add Products</NavLink></li>
 
                   <li><NavLink to="/dashboard/adoptionrequest" className={navLinkClass}><CiSquareQuestion></CiSquareQuestion>Adoption Request</NavLink></li>
                   <li><NavLink to="/dashboard/createdonationcampaign" className={navLinkClass}><MdCreateNewFolder></MdCreateNewFolder>Create Donation Campaign</NavLink></li>
@@ -74,7 +75,8 @@ const Dashboard = () => {
                 <h2 className="text-xl font-bold text-gray-800 mb-4">Dashboard</h2>
                 <NavLink to="/dashboard/addpet" className={navLinkClass}><IoMdAdd></IoMdAdd>Add a Pet</NavLink>
                 <NavLink to="/dashboard/myaddedpets" className={navLinkClass}><MdPets></MdPets>My Added Pets</NavLink>
-                 <NavLink to="/dashboard/addproduct" className={navLinkClass}><BiDonateHeart></BiDonateHeart>Add Products</NavLink>
+                 <NavLink to="/dashboard/addproduct" className={navLinkClass}><IoMdAdd></IoMdAdd>Add Products</NavLink>
+                 <NavLink to="/dashboard/myaddedproducts" className={navLinkClass}><AiFillProduct></AiFillProduct>My Added Products</NavLink>
                 <NavLink to="/dashboard/adoptionrequest" className={navLinkClass}><CiSquareQuestion></CiSquareQuestion>Adoption Request</NavLink>
                 <NavLink to="/dashboard/createdonationcampaign" className={navLinkClass}><MdCreateNewFolder></MdCreateNewFolder>Create Donation Campaign</NavLink>
                 <NavLink to="/dashboard/mydonationcampaigns" className={navLinkClass}><FaDonate></FaDonate>My Donation Campaigns</NavLink>

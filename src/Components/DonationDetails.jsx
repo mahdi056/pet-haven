@@ -16,7 +16,7 @@ const DonationDetails = () => {
   const [users, setUsers] = useState([]);
   const [creator, setCreator] = useState(null);
 
-  console.log(user.email);
+  
 
   useEffect(() => {
     axios.get(`http://localhost:5000/donation-campaign/${id}`)
@@ -79,8 +79,8 @@ const DonationDetails = () => {
 
     const payload = {
       amount: newDonation,
-      name: user.displayName || "Anonymous Donor",
-      email: user.email || "donor@gmail.com",
+      name: user?.displayName || "Anonymous Donor",
+      email: user?.email || "donor@gmail.com",
       phone: "01707226784",
       campaignId: campaign._id,
       petImage: campaign.petImage,

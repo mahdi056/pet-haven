@@ -54,7 +54,7 @@ const PetAccesories = () => {
 
         {products.length === 0 && (
           <p className="text-center col-span-full">
-            No approved products available.
+            No products available.
           </p>
         )}
       </div>
