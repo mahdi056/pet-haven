@@ -58,6 +58,7 @@ const MngProducts = () => {
               <h2 className="card-title">Name: {product.name}</h2>
               <p>Price: {product.price}</p>
               <p>Size: {product.size}</p>
+              <p>In Stock: {product.stock}</p>
               <p className="text-sm">Description: {product.description}</p>
 
               <p className="text-sm">
@@ -68,7 +69,7 @@ const MngProducts = () => {
               </p>
 
               <p className="font-semibold">
-                Approved: {product.approve}
+                Approve: {product.approve}
               </p>
 
               <div className="card-actions justify-between mt-4">

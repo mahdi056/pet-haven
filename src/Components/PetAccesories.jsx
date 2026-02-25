@@ -1,8 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router";
+import { AuthContext } from "./Provider/AuthProvider";
+import { toast, ToastContainer } from "react-toastify";
 
 const PetAccesories = () => {
   const [products, setProducts] = useState([]);
+  const {user} = useContext(AuthContext);
 
   useEffect(() => {
     fetchApprovedProducts();
@@ -13,13 +17,41 @@ const PetAccesories = () => {
     setProducts(res.data);
   };
 
-  const handleAddToCart = (product) => {
-    // later you can connect this to cart collection / context
-    console.log("Added to cart:", product);
+ const handleAddToCart = async (product) => {
+  const userEmail = user.email; 
+
+  const cartItem = {
+    productId: product._id,
+    name: product.name,
+    size: product.size,
+    price: product.price,
+    image: product.image,
+    adderEmail: product.adderEmail,
+    userEmail: userEmail,
+    
   };
+
+  try {
+    const res = await axios.post(
+      "http://localhost:5000/cart",
+      cartItem
+    );
+
+    if (res.data.insertedId) {
+      toast.success("Added to cart", {
+        position: 'top-center',
+        autoClose: 2000,
+      });
+    } 
+  } catch (error) {
+    console.error(error);
+    toast.error("Failed to add to cart");
+  }
+};
 
   return (
     <div className="max-w-6xl mx-auto p-6">
+      <ToastContainer></ToastContainer>
       <h2 className="text-2xl text-center font-bold mb-6">Pet Accessories</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -38,15 +70,32 @@ const PetAccesories = () => {
 
               <p className="font-semibold">Price: {product.price}</p>
               <p>Size: {product.size}</p>
+              <p>In Stock: {product.stock}</p>
               <p>Description: {product.description}</p>
 
               <div className="card-actions mt-4">
-                <button
+
+              {
+                user ?
+
+                ( <button
+                disabled={product.stock == 0}
                   onClick={() => handleAddToCart(product)}
                   className="btn btn-warning w-full"
                 >
                   Add to Cart
-                </button>
+                </button>)
+                :
+                ( <Link to='/login'>
+                <button
+                  
+                  className="btn btn-warning w-full"
+                >
+                  Add to Cart
+                </button></Link>)
+              }
+
+               
               </div>
             </div>
           </div>

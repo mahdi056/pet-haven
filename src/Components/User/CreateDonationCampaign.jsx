@@ -62,7 +62,7 @@ const CreateDonationCampaign = () => {
       const res = await axios.post('http://localhost:5000/donation-campaign', campaignData);
 
       if (res.data.insertedId) {
-        toast.success('Donation campaign created', {
+        toast.success('Donation campaign created. Please wait for Admin Response', {
           position: 'top-center',
           autoClose: 2000,
         });

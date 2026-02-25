@@ -14,6 +14,7 @@ const Addpet = () => {
     location: '',
     description: '',
     image: '',
+    userName: user?.displayName,
     userEmail: user?.email,
 
   });
@@ -58,7 +59,7 @@ const Addpet = () => {
 
     try {
       await axios.post('http://localhost:5000/pet-list', newPet);
-      toast.success('Pet added successfully!', {
+      toast.success('Pet added successfully! Please wait for Admin Response', {
         position: 'top-center',
         autoClose: 2000
       });

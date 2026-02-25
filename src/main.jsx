@@ -37,7 +37,11 @@ import PrivateRoute from './Components/PrivateRoute';
 import Addproduct from './Components/User/Addproduct';
 import MngProducts from './Components/Admin/MngProducts';
 import PetAccesories from './Components/PetAccesories';
-import Myaddedproducts from './Components/User/Myaddedproducts';
+import Mycart from './Components/User/Mycart';
+import Orders from './Components/User/Orders';
+import MngPets from './Components/Admin/MngPets';
+import MngDonations from './Components/Admin/MngDonations';
+
 
 
 
@@ -154,6 +158,18 @@ const router = createBrowserRouter([
           <EditDonation></EditDonation>
         </PrivateRoute>
       },
+      {
+        path: '/dashboard/mycart',
+        element: <PrivateRoute>
+          <Mycart></Mycart>
+        </PrivateRoute>
+      },
+      {
+        path: '/dashboard/orders',
+        element: <PrivateRoute>
+          <Orders></Orders>
+        </PrivateRoute>
+      },
 
       {
         path: '/dashboard/users',
@@ -191,9 +207,18 @@ const router = createBrowserRouter([
         </PrivateRoute> 
       },
       {
-        path: '/dashboard/myaddedproducts',
-        element: <Myaddedproducts></Myaddedproducts>
+        path: '/dashboard/mngpets',
+        element: <PrivateRoute>
+          <MngPets></MngPets>
+        </PrivateRoute>
+      },
+      {
+        path: '/dashboard/mngdonations',
+        element: <PrivateRoute>
+          <MngDonations></MngDonations>
+        </PrivateRoute>
       }
+      
 
 
     ]

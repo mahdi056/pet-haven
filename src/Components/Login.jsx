@@ -36,7 +36,7 @@ const Login = () => {
         navigate('/');
     } catch (error) {
         console.error(error.message);
-        toast.error("Please Register", { position: "top-center" }); 
+        toast.error("Login Failed", { position: "top-center" }); 
     }
 };
 

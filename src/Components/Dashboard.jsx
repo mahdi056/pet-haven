@@ -10,7 +10,10 @@ import { FaDonate } from "react-icons/fa";
 import { BiDonateHeart } from "react-icons/bi";
 import { FaHome } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
-import { AiFillProduct } from "react-icons/ai";
+import { FaShoppingCart } from "react-icons/fa";
+import { FaRegFileAlt } from "react-icons/fa";
+import { MdManageAccounts } from "react-icons/md";
+import { SiNginxproxymanager } from "react-icons/si";
 
 const Dashboard = () => {
 
@@ -76,7 +79,9 @@ const Dashboard = () => {
                 <NavLink to="/dashboard/addpet" className={navLinkClass}><IoMdAdd></IoMdAdd>Add a Pet</NavLink>
                 <NavLink to="/dashboard/myaddedpets" className={navLinkClass}><MdPets></MdPets>My Added Pets</NavLink>
                  <NavLink to="/dashboard/addproduct" className={navLinkClass}><IoMdAdd></IoMdAdd>Add Products</NavLink>
-                 <NavLink to="/dashboard/myaddedproducts" className={navLinkClass}><AiFillProduct></AiFillProduct>My Added Products</NavLink>
+                 <NavLink to="/dashboard/mycart" className={navLinkClass}><FaShoppingCart></FaShoppingCart>My Cart</NavLink>
+                 <NavLink to="/dashboard/orders" className={navLinkClass}><FaRegFileAlt></FaRegFileAlt>Orders</NavLink>
+                 
                 <NavLink to="/dashboard/adoptionrequest" className={navLinkClass}><CiSquareQuestion></CiSquareQuestion>Adoption Request</NavLink>
                 <NavLink to="/dashboard/createdonationcampaign" className={navLinkClass}><MdCreateNewFolder></MdCreateNewFolder>Create Donation Campaign</NavLink>
                 <NavLink to="/dashboard/mydonationcampaigns" className={navLinkClass}><FaDonate></FaDonate>My Donation Campaigns</NavLink>
@@ -124,7 +129,9 @@ const Dashboard = () => {
                 <NavLink to="/dashboard/users" className={navLinkClass}><FaUsers></FaUsers>Users</NavLink>
                 <NavLink to="/dashboard/allpets" className={navLinkClass}><MdPets></MdPets>All Pets</NavLink>
                 <NavLink to="/dashboard/alldonations" className={navLinkClass}><BiDonateHeart></BiDonateHeart>All Donations</NavLink>
-                <NavLink to="/dashboard/mngproducts" className={navLinkClass}><BiDonateHeart></BiDonateHeart>Manage Products</NavLink>
+                <NavLink to="/dashboard/mngproducts" className={navLinkClass}><SiNginxproxymanager></SiNginxproxymanager>Manage Products</NavLink>
+                <NavLink to="/dashboard/mngpets" className={navLinkClass}><MdManageAccounts></MdManageAccounts>Manage Pets</NavLink>
+                <NavLink to="/dashboard/mngdonations" className={navLinkClass}><BiDonateHeart></BiDonateHeart>Manage Donation Campaign</NavLink>
 
                 <NavLink to="/" className={navLinkClass}><FaHome></FaHome>Home</NavLink>
               </div>

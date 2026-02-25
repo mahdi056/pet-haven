@@ -52,7 +52,7 @@ const Register = () => {
 
 
         if (!passwordRegex.test(password)) {
-            setPassworderror("Password must include at least one uppercase letter, a number, a special character, and be at least 6 characters long.");
+            setPassworderror("Password must include at least one uppercase letter(A-Z), a number(0-9), a special character(!@#$%^&*), and be at least 6 characters long.");
 
             return;
         }
@@ -178,7 +178,7 @@ const Register = () => {
                             <input name="password" type="password" className="input input-bordered w-full" placeholder="Password" required />
 
                             {passworderror && <p className='text-red-500 text-sm'>{passworderror}</p>}
-                            <p className='text-sm'>Password must include at least one uppercase letter, a number, a special character and at least 6 characters long.</p>
+                            <p className='text-sm'>Password must include at least one uppercase letter(A-Z), a number(0-9), a special character(!@#$%^&*), and be at least 6 characters long.</p>
                             <label className="label">
                                 <span className="label-text">Confirm Password</span>
                             </label>

@@ -10,6 +10,7 @@ const Addproduct = () => {
     name: "",
     price: "",
     size: "",
+    stock: "",
     description: "",
   });
 
@@ -44,6 +45,7 @@ const Addproduct = () => {
         name: product.name,
         price: product.price,
         size: product.size,
+        stock: product.stock,
         description: product.description,
         image: imageUrl,
         adderName: user.displayName,
@@ -64,6 +66,7 @@ const Addproduct = () => {
           name: "",
           price: "",
           size: "",
+          stock: "",
           description: "",
         });
         setImage(null);
@@ -116,6 +119,16 @@ const Addproduct = () => {
       name="size"
       placeholder="Product Size"
       value={product.size}
+      onChange={handleChange}
+      className="input input-bordered w-full"
+      required
+    />
+
+    <input
+      type="number"
+      name="stock"
+      placeholder="In Stock"
+      value={product.stock}
       onChange={handleChange}
       className="input input-bordered w-full"
       required
