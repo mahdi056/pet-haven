@@ -41,6 +41,8 @@ import Mycart from './Components/User/Mycart';
 import Orders from './Components/User/Orders';
 import MngPets from './Components/Admin/MngPets';
 import MngDonations from './Components/Admin/MngDonations';
+import AboutUs from './Components/AboutUS';
+import OrderHistory from './Components/Admin/OrderHistory';
 
 
 
@@ -86,6 +88,10 @@ const router = createBrowserRouter([
       {
         path: '/petaccesories',
         element: <PetAccesories></PetAccesories>
+      },
+      {
+        path: '/aboutus',
+        element: <AboutUs></AboutUs>
       }
     ]
   },
@@ -216,6 +222,12 @@ const router = createBrowserRouter([
         path: '/dashboard/mngdonations',
         element: <PrivateRoute>
           <MngDonations></MngDonations>
+        </PrivateRoute>
+      },
+      {
+        path: '/dashboard/orderhistory',
+        element: <PrivateRoute>
+          <OrderHistory></OrderHistory>
         </PrivateRoute>
       }
       

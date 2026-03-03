@@ -25,7 +25,7 @@ const Footer = () => {
           {/* Contact Info */}
           <div>
             <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
-            <p className="text-sm text-gray-300">Email: support@pethaven.com</p>
+            <p className="text-sm text-gray-300">Email: ahnafmahdi12@gmail.com</p>
             <p className="text-sm text-gray-300 mt-1">Phone: +880 1707226784</p>
             <p className="text-sm text-gray-300 mt-1">Location: Sylhet, Bangladesh</p>
           </div>

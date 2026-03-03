@@ -70,6 +70,7 @@ const MngDonations = () => {
 
               <div className="card-actions justify-end mt-4">
                 <button
+                disabled={campaign.approve == "Accepted"}
                   onClick={() =>
                     handleApprove(campaign._id, "Accepted")
                   }
@@ -79,6 +80,7 @@ const MngDonations = () => {
                 </button>
 
                 <button
+                disabled={campaign.approve == "Rejected"}
                   onClick={() =>
                     handleApprove(campaign._id, "Rejected")
                   }

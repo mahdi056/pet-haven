@@ -41,8 +41,8 @@ const Register = () => {
 
 
 
-        const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{7,}$/;
-        const emailRegex = /^[a-zA-Z][a-zA-Z0-9._%+-]{5,63}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{6,}$/;
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         const nameRegex = /^[A-Za-z ]+$/;
 
         if (phone.length !== 11) {
