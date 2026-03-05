@@ -43,6 +43,8 @@ import MngPets from './Components/Admin/MngPets';
 import MngDonations from './Components/Admin/MngDonations';
 import AboutUs from './Components/AboutUS';
 import OrderHistory from './Components/Admin/OrderHistory';
+import DonationHistory from './Components/Admin/DonationHistory';
+import MyAddedProducts from './Components/User/MyAddedProducts';
 
 
 
@@ -205,6 +207,12 @@ const router = createBrowserRouter([
         </PrivateRoute>
       },
       {
+        path: '/dashboard/myaddedproducts',
+        element: <PrivateRoute>
+          <MyAddedProducts></MyAddedProducts>
+        </PrivateRoute>
+      },
+      {
         path: '/dashboard/mngproducts',
         element: <PrivateRoute>
 
@@ -228,6 +236,12 @@ const router = createBrowserRouter([
         path: '/dashboard/orderhistory',
         element: <PrivateRoute>
           <OrderHistory></OrderHistory>
+        </PrivateRoute>
+      },
+      {
+        path: '/dashboard/donationhistory',
+        element: <PrivateRoute>
+          <DonationHistory></DonationHistory>
         </PrivateRoute>
       }
       

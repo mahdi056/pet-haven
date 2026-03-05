@@ -7,6 +7,7 @@ import { toast, ToastContainer } from "react-toastify";
 const PetAccesories = () => {
   const [products, setProducts] = useState([]);
   const {user} = useContext(AuthContext);
+  const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
     fetchApprovedProducts();
@@ -16,6 +17,23 @@ const PetAccesories = () => {
     const res = await axios.get("http://localhost:5000/products/approved");
     setProducts(res.data);
   };
+
+
+  const fetchUserCart = async () => {
+    if (user?.email) {
+      const res = await axios.get(`http://localhost:5000/cart-user?email=${user.email}`);
+      console.log(res.data);
+      setCartItems(res.data);
+    }
+  };
+
+  useEffect(() => {
+  fetchApprovedProducts();
+  // Call this here!
+  if (user?.email) {
+    fetchUserCart();
+  }
+}, [user]);
 
  const handleAddToCart = async (product) => {
   const userEmail = user.email; 
@@ -30,6 +48,18 @@ const PetAccesories = () => {
     userEmail: userEmail,
     
   };
+
+  const itemsInCart = cartItems.filter(item => item.productId === product._id).length;
+    const dbStock = Number(product.stock);
+
+    // 3. CHECK: If I add one more, will it exceed stock?
+    if (itemsInCart + 1 > dbStock) {
+      toast.error(`You can't add more! Only ${dbStock} available in stock.`, {
+        position: 'top-center'
+      });
+      return; // Stop here! Don't call the API.
+    }
+
 
   try {
     const res = await axios.post(

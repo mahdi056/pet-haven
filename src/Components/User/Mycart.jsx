@@ -13,11 +13,15 @@ const Mycart = () => {
     address: "",
   });
   const [showModal, setShowModal] = useState(false);
+  const [nameerror, setNameerror] = useState("");
+  const [emailerror, setEmailerror] = useState("");
+  const [phoneerror, setPhoneerror] = useState("");
+
 
   const { user } = useContext(AuthContext);
   const userEmail = user?.email;
 
-  
+
 
   useEffect(() => {
     if (userEmail) {
@@ -46,46 +50,76 @@ const Mycart = () => {
   };
 
   const handleConfirmOrder = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const orderData = {
-    buyerName: formData.name,
-    buyerEmail: formData.email,
-    buyerPhone: formData.phone,
-    address: formData.address,
-    items: cartItems,
-    totalPrice,
-    paymentMethod: "Cash On Delivery",
-    orderDate: new Date(),
-  };
-
-  try {
-    const res = await axios.post("http://localhost:5000/orders", orderData);
-
-    // If order is successful
-    setCartItems([]);
-    setShowModal(false);
-
-    Swal.fire({
-      title: "Order Placed!",
-      text: "Your order has been successfully placed.",
-      icon: "success",
-      confirmButtonColor: "#ff7a00",
-    });
-  } catch (error) {
+    const buyerName = formData.name;
+    const buyerEmail = formData.email;
+    const buyerPhone = formData.phone;
     
-    const message =
-      error.response?.data?.message ||
-      "Order failed. Please try again.";
 
-    Swal.fire({
-      title: "Error",
-      text: message,
-      icon: "error",
-      confirmButtonColor: "#ff7a00",
-    });
-  }
-};
+    const orderData = {
+      buyerName: formData.name,
+      buyerEmail: formData.email,
+      buyerPhone: formData.phone,
+      address: formData.address,
+      items: cartItems,
+      totalPrice,
+      paymentMethod: "Cash On Delivery",
+      orderDate: new Date(),
+    };
+
+    const nameRegex = /^[A-Za-z ]+$/;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+
+
+    if (!nameRegex.test(buyerName)) {
+      setNameerror("Invalid Name")
+      return;
+    }
+    if (!emailRegex.test(buyerEmail)) {
+      setEmailerror("Invalid Email Format")
+      return;
+    }
+    if (buyerPhone.length !== 11) {
+      setPhoneerror("Please Enter a valid Phone Number")
+      return;
+    }
+
+    setNameerror("");
+    setEmailerror("");
+    setPhoneerror("");
+
+
+
+
+    try {
+      const res = await axios.post("http://localhost:5000/orders", orderData);
+
+
+      setCartItems([]);
+      setShowModal(false);
+
+      Swal.fire({
+        title: "Order Placed!",
+        text: "Order placed successfully. We will contact with you soon",
+        icon: "success",
+        confirmButtonColor: "#ff7a00",
+      });
+    } catch (error) {
+
+      const message =
+        error.response?.data?.message ||
+        "Order failed. Please try again.";
+
+      Swal.fire({
+        title: "Error",
+        text: message,
+        icon: "error",
+        confirmButtonColor: "#ff7a00",
+      });
+    }
+  };
 
 
   const handleDeleteItem = async (id) => {
@@ -135,25 +169,25 @@ const Mycart = () => {
                   </figure>
 
                   <div className="card-body">
-                
-                      <h4 className="card-title">{item.name}</h4>
+
+                    <h4 className="card-title">{item.name}</h4>
                     <p>Size: {item.size}</p>
                     <p className="font-semibold">
                       Price: {item.price} BDT
                     </p>
-                    
 
-                 
+
+
                   </div>
 
-                    <div className="flex ">
-                     <button
+                  <div className="flex ">
+                    <button
                       onClick={() => handleDeleteItem(item._id)}
                       className="text-red-500 text-xl hover:text-red-700 "
                     >
-                      <MdDelete size={28}/>
+                      <MdDelete size={28} />
                     </button>
-                   </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -202,6 +236,7 @@ const Mycart = () => {
                   })
                 }
               />
+              {nameerror && <p>{nameerror}</p>}
 
               <input
                 type="email"
@@ -216,11 +251,14 @@ const Mycart = () => {
                   })
                 }
               />
+              {emailerror && <p>{emailerror}</p>}
 
               <input
                 type="number"
-                placeholder="Phone Number"
+                inputMode="numeric"
+                placeholder="11 Digit Phone Number"
                 className="input input-bordered w-full"
+                pattern='[0-9]{11}'
                 required
                 value={formData.phone}
                 onChange={(e) =>
@@ -230,6 +268,8 @@ const Mycart = () => {
                   })
                 }
               />
+
+              {phoneerror && <p>{phoneerror}</p>}
 
               <textarea
                 placeholder="Full Address"

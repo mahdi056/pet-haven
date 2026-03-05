@@ -15,6 +15,8 @@ import { FaRegFileAlt } from "react-icons/fa";
 import { MdManageAccounts } from "react-icons/md";
 import { SiNginxproxymanager } from "react-icons/si";
 import { MdHistory } from "react-icons/md";
+import { RiProductHuntFill } from "react-icons/ri";
+
 
 const Dashboard = () => {
 
@@ -80,6 +82,7 @@ const Dashboard = () => {
                 <NavLink to="/dashboard/addpet" className={navLinkClass}><IoMdAdd></IoMdAdd>Add a Pet</NavLink>
                 <NavLink to="/dashboard/myaddedpets" className={navLinkClass}><MdPets></MdPets>My Added Pets</NavLink>
                  <NavLink to="/dashboard/addproduct" className={navLinkClass}><IoMdAdd></IoMdAdd>Add Products</NavLink>
+                 <NavLink to="/dashboard/myaddedproducts" className={navLinkClass}><RiProductHuntFill></RiProductHuntFill>My Added Products</NavLink>
                  <NavLink to="/dashboard/mycart" className={navLinkClass}><FaShoppingCart></FaShoppingCart>My Cart</NavLink>
                  <NavLink to="/dashboard/orders" className={navLinkClass}><FaRegFileAlt></FaRegFileAlt>Orders</NavLink>
                  
@@ -135,6 +138,7 @@ const Dashboard = () => {
                 <NavLink to="/dashboard/mngpets" className={navLinkClass}><MdManageAccounts></MdManageAccounts>Manage Pets</NavLink>
                 <NavLink to="/dashboard/mngdonations" className={navLinkClass}><BiDonateHeart></BiDonateHeart>Manage Donation Campaign</NavLink>
                 <NavLink to="/dashboard/orderhistory" className={navLinkClass}><MdHistory></MdHistory>Order History</NavLink>
+                <NavLink to="/dashboard/donationhistory" className={navLinkClass}><FaDonate></FaDonate>Donation History</NavLink>
 
                 <NavLink to="/" className={navLinkClass}><FaHome></FaHome>Home</NavLink>
               </div>

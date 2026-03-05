@@ -30,16 +30,6 @@ const Register = () => {
         const phone = e.target.phone.value;
         const city = e.target.city.value;
         
-        
-
-   
-
-
-
-
-
-
-
 
         const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{6,}$/;
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
