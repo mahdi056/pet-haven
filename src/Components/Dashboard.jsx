@@ -67,6 +67,9 @@ const Dashboard = () => {
                   <li><NavLink to="/dashboard/addpet" className={navLinkClass}><IoMdAdd></IoMdAdd>Add a Pet</NavLink></li>
                   <li><NavLink to="/dashboard/myaddedpets" className={navLinkClass}><MdPets></MdPets>My Added Pets</NavLink></li>
                   <li><NavLink to="/dashboard/addproduct" className={navLinkClass}><IoMdAdd></IoMdAdd>Add Products</NavLink></li>
+                  <li><NavLink to="/dashboard/myaddedproducts" className={navLinkClass}><RiProductHuntFill></RiProductHuntFill>My Added Products</NavLink></li>
+                  <li><NavLink to="/dashboard/mycart" className={navLinkClass}><FaShoppingCart></FaShoppingCart>My Cart</NavLink></li>
+                  <li><NavLink to="/dashboard/orders" className={navLinkClass}><FaRegFileAlt></FaRegFileAlt>Orders</NavLink></li>
 
                   <li><NavLink to="/dashboard/adoptionrequest" className={navLinkClass}><CiSquareQuestion></CiSquareQuestion>Adoption Request</NavLink></li>
                   <li><NavLink to="/dashboard/createdonationcampaign" className={navLinkClass}><MdCreateNewFolder></MdCreateNewFolder>Create Donation Campaign</NavLink></li>
@@ -121,8 +124,11 @@ const Dashboard = () => {
                   <li><NavLink to="/dashboard/users" className={navLinkClass}><FaUsers></FaUsers> Users</NavLink></li>
                   <li><NavLink to="/dashboard/allpets" className={navLinkClass}><MdPets></MdPets>All Pets</NavLink></li>
                   <li><NavLink to="/dashboard/alldonations" className={navLinkClass}><BiDonateHeart></BiDonateHeart>All Donations</NavLink></li>
-                  <li><NavLink to="/dashboard/mngproducts" className={navLinkClass}><BiDonateHeart></BiDonateHeart>Manage Products</NavLink></li>
+                  <li><NavLink to="/dashboard/mngproducts" className={navLinkClass}><SiNginxproxymanager></SiNginxproxymanager>Manage Products</NavLink></li>
+                  <li><NavLink to="/dashboard/mngpets" className={navLinkClass}><BiDonateHeart></BiDonateHeart>Manage Pets</NavLink></li>
+                  <li><NavLink to="/dashboard/mngdonations" className={navLinkClass}><BiDonateHeart></BiDonateHeart>Manage Donation Campaign</NavLink></li>
                   <li><NavLink to="/dashboard/orderhistory" className={navLinkClass}><MdHistory></MdHistory>Order History</NavLink></li>
+                  <li><NavLink to="/dashboard/donationhistory" className={navLinkClass}><FaDonate></FaDonate>Donation History</NavLink></li>
                   <li><NavLink to="/" className={navLinkClass}>Home</NavLink></li>
 
                 </ul>
