@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router";
+import { useParams, useNavigate, Link } from "react-router";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -93,9 +93,15 @@ const EditDonation = () => {
                     </button>
                 </div>
 
+                <div className="flex gap-x-2">
+                    
                 <button type="submit" className="btn btn-warning text-white rounded">
                     Update Campaign
                 </button>
+
+                <Link to='/dashboard/mydonationcampaigns'><button className="btn btn-error">Back</button></Link>
+                </div>
+
             </form>
         </div>
     );

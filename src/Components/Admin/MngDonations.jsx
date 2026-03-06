@@ -64,6 +64,8 @@ const MngDonations = () => {
                 Deadline:{" "}
                 {new Date(campaign.deadline).toLocaleDateString()}
               </p>
+               <p>Description: {campaign.description}</p>
+               <p>Adder Email: {campaign.description}</p>
               <p className="font-semibold">
                 Status: {campaign.approve}
               </p>

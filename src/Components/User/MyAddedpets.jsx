@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-import { useReactTable, getCoreRowModel, getSortedRowModel, flexRender } from '@tanstack/react-table';
+import { useReactTable, getCoreRowModel, flexRender } from '@tanstack/react-table';
 import axios from 'axios';
 import { AuthContext } from '../Provider/AuthProvider';
 import Modal from 'react-modal';
@@ -62,11 +62,11 @@ const MyAddedPets = () => {
       accessorKey: 'image',
       cell: info => <img src={info.getValue()} alt="pet" className="w-16 h-16 rounded" />
     },
-    // {
-    //   header: 'Status',
-    //   accessorKey: 'adopted',
-    //   cell: info => info.getValue() ? 'Adopted' : 'Not Adopted'
-    // },
+     {
+      header: 'Approve',
+      accessorKey: 'approve'
+    },
+  
     {
       header: 'Actions',
       cell: info => {
@@ -76,11 +76,7 @@ const MyAddedPets = () => {
             <button onClick={() => navigate(`/dashboard/updatepet/${pet._id}`)} className="btn btn-sm btn-primary">Update</button>
             <button onClick={() => { setSelectedPetId(pet._id); setModalIsOpen(true); }} className="btn btn-sm btn-error">Delete</button>
          
-            {/* {
-              pet.adopted ? ( <button onClick={() => handleAdopt(pet._id)} className="btn btn-sm btn-success">Adopted</button>)
-              :
-              ( <button onClick={() => handleAdopt(pet._id)} className="btn btn-sm btn-success">Adopt</button>)
-            } */}
+          
           </div>
         );
       }

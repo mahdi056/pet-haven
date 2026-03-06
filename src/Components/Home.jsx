@@ -37,20 +37,7 @@ const Home = () => {
         },
       ];
 
-      const feedback = [
-        {
-          name: "Emily Johnson",
-          comment: "Pet Haven made the adoption process so smooth. We found our cat Luna and she's been the perfect addition to our family!",
-        },
-        {
-          name: "David Thompson",
-          comment: "I was able to support rescue dogs through donation campaigns. Love the mission and transparency!",
-        },
-        {
-          name: "Sophia Lee",
-          comment: "From browsing to adoption, every step was simple and heartwarming. Highly recommend Pet Haven!",
-        },
-      ];
+     
 
     return (
         <div>
@@ -160,26 +147,9 @@ const Home = () => {
       </div>
     </section>
 
-    {/* what people say */}
+    
 
-    <section className="bg-white py-16">
-      <div className="max-w-6xl mx-auto px-4 text-center">
-        <h2 className="text-4xl font-bold text-gray-800 mb-10">
-           What People Say
-        </h2>
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {feedback.map((person, index) => (
-            <div
-              key={index}
-              className="bg-orange-50 p-6 rounded-xl shadow-md text-center"
-            >
-              <p className="text-gray-700 text-sm italic mb-4">"{person.comment}"</p>
-              <h4 className="text-md font-semibold text-orange-600">{person.name}</h4>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+    
 
         </div>
     );

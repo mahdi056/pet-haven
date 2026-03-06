@@ -41,6 +41,7 @@ const MyDonationCampaign = () => {
           <tr className="bg-gray-100 text-left">
             <th className="py-2 px-4 border">Pet Name</th>
             <th className="py-2 px-4 border">Max Donation</th>
+            <th className="py-2 px-4 border">Approve</th>
             <th className="py-2 px-4 border">Progress</th>
             <th className="py-2 px-4 border">Actions</th>
           </tr>
@@ -50,6 +51,7 @@ const MyDonationCampaign = () => {
             <tr key={c._id} className="border-t">
               <td className="py-2 px-4 border">{c.petName}</td>
               <td className="py-2 px-4 border">{c.maxAmount}</td>
+              <td className="py-2 px-4 border">{c.approve}</td>
               <td className="py-2 px-4 border">
                 <progress
                   className="w-48 h-3"

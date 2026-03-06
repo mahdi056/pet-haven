@@ -12,6 +12,7 @@ const PetDetails = () => {
   const [showModal, setShowModal] = useState(false);
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const loginuserEmail = user?.email;
 
   useEffect(() => {
     axios.get(`http://localhost:5000/pet-list/${id}`)
@@ -70,9 +71,10 @@ const PetDetails = () => {
 
      <div className="flex items-center gap-x-2 mt-4">
       {
-        user && user.emailVerified ? ( <button
+        user && user?.emailVerified ? ( <button
         onClick={() => setShowModal(true)}
         className="btn btn-warning mt-4"
+        disabled={pet.userEmail === loginuserEmail}
       >
         Adopt
       </button>)

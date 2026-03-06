@@ -15,10 +15,7 @@ const Register = () => {
     const [nameerror, setNameerror] = useState("");
     const navigate = useNavigate();
 
-
-
-
-
+   
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -32,8 +29,10 @@ const Register = () => {
         
 
         const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{6,}$/;
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const emailRegex = /^[a-z][a-z0-9._%+-]*@[a-z0-9.-]+\.[a-z]{2,}$/;
         const nameRegex = /^[A-Za-z ]+$/;
+
+       
 
         if (phone.length !== 11) {
             setPhoneerror("Please Enter a valid Phone Number")

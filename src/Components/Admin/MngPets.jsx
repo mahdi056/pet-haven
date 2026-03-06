@@ -53,8 +53,12 @@ const MngPets = () => {
 
             <div className="card-body">
               <h2 className="card-title">{pet.name}</h2>
-              <p>Breed: {pet.breed}</p>
+              <p>Category: {pet.category}</p>
               <p>Age: {pet.age}</p>
+              <p>Location: {pet.location}</p>
+              <p>Description: {pet.description}</p>
+              <p>Adder Name: {pet.userName}</p>
+              <p>Adder Email: {pet.userEmail}</p>
               <p className="font-semibold">Status: {pet.approve}</p>
 
               <div className="card-actions justify-end mt-4">

@@ -15,13 +15,16 @@ const DonationDetails = () => {
   const [donationAmount, setDonationAmount] = useState("");
   const [users, setUsers] = useState([]);
   const [creator, setCreator] = useState(null);
+  const loginuserEmail = user?.email;
+
+  
 
   
 
   useEffect(() => {
     axios.get(`http://localhost:5000/donation-campaign/${id}`)
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         setCampaign(res.data)})
       .catch(err => console.error("Error fetching campaign details:", err));
   }, [id]);
@@ -57,7 +60,7 @@ const DonationDetails = () => {
     if (current + newDonation > max) {
       Swal.fire(
         "Limit Exceeded",
-        `You cannot donate more than the remaining amount (৳${max - current})`,
+        `You cannot donate more than the remaining amount (${max - current})`,
         "warning"
       );
       return;
@@ -154,7 +157,7 @@ const DonationDetails = () => {
           user && user.emailVerified ? (<button
             onClick={() => setIsModalOpen(true)}
             className="mt-6 btn btn-warning text-black px-4 py-2 rounded"
-            disabled={campaign.status == 'Paused' || campaign.paused == true}
+            disabled={campaign.status == 'Paused' || campaign.paused == true || campaign.userEmail === loginuserEmail}
           >
             Donate Now
           </button>)

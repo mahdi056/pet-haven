@@ -5,17 +5,14 @@ const OrderHistory = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    fetchOrders();
+    axios.get("http://localhost:5000/order-history")
+      .then(res => {
+        const sorted = res.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        setOrders(sorted);
+      })
   }, []);
 
-  const fetchOrders = async () => {
-    try {
-      const res = await axios.get("http://localhost:5000/order-history");
-      setOrders(res.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+ 
 
   return (
     <div className="min-h-screen bg-base-200 p-6">
@@ -38,7 +35,7 @@ const OrderHistory = () => {
                 {/* Order Info */}
                 <div className="grid md:grid-cols-2 gap-4 mb-4">
                   <div>
-                    
+
                     <p>
                       Date:{" "}
                       {new Date(order.orderDate).toLocaleString()}

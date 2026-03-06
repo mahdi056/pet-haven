@@ -1,15 +1,18 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
-import { AuthContext } from '../Provider/AuthProvider'; 
+import { AuthContext } from '../Provider/AuthProvider';
 
 const MyDonations = () => {
-  const { user } = useContext(AuthContext); 
+  const { user } = useContext(AuthContext);
   const [donations, setDonations] = useState([]);
 
   useEffect(() => {
     if (user?.email) {
       axios.get(`http://localhost:5000/donations?email=${user.email}`)
-        .then(res => setDonations(res.data))
+        .then(res => {
+          const sorted = res.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+          setDonations(sorted);
+        })
         .catch(err => console.error('Error fetching donations:', err));
     }
   }, [user]);

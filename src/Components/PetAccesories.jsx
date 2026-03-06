@@ -8,6 +8,7 @@ const PetAccesories = () => {
   const [products, setProducts] = useState([]);
   const {user} = useContext(AuthContext);
   const [cartItems, setCartItems] = useState([]);
+  const loginuserEmail = user?.email;
 
   useEffect(() => {
     fetchApprovedProducts();
@@ -22,14 +23,14 @@ const PetAccesories = () => {
   const fetchUserCart = async () => {
     if (user?.email) {
       const res = await axios.get(`http://localhost:5000/cart-user?email=${user.email}`);
-      console.log(res.data);
+      // console.log(res.data);
       setCartItems(res.data);
     }
   };
 
   useEffect(() => {
   fetchApprovedProducts();
-  // Call this here!
+
   if (user?.email) {
     fetchUserCart();
   }
@@ -106,10 +107,10 @@ const PetAccesories = () => {
               <div className="card-actions mt-4">
 
               {
-                user ?
+                user ? 
 
                 ( <button
-                disabled={product.stock == 0}
+                disabled={product.stock == 0 || product.adderEmail === loginuserEmail}
                   onClick={() => handleAddToCart(product)}
                   className="btn btn-warning w-full"
                 >
