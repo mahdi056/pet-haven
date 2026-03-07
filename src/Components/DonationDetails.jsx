@@ -101,7 +101,7 @@ const DonationDetails = () => {
       // console.log("Backend /api/payment response:", res.data);
 
       if (res.data && res.data.url) {
-        console.log("Redirecting user to payment gateway:", res.data.url);
+        // console.log("Redirecting user to payment gateway:", res.data.url);
 
 
         window.location.href = res.data.url;

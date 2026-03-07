@@ -53,12 +53,12 @@ const PetAccesories = () => {
   const itemsInCart = cartItems.filter(item => item.productId === product._id).length;
     const dbStock = Number(product.stock);
 
-    // 3. CHECK: If I add one more, will it exceed stock?
+    
     if (itemsInCart + 1 > dbStock) {
       toast.error(`You can't add more! Only ${dbStock} available in stock.`, {
         position: 'top-center'
       });
-      return; // Stop here! Don't call the API.
+      return; 
     }
 
 

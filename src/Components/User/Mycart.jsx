@@ -69,7 +69,7 @@ const Mycart = () => {
     };
 
     const nameRegex = /^[A-Za-z ]+$/;
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const emailRegex = /^[a-z][a-z0-9._%+-]*@[a-z0-9.-]+\.[a-z]{2,}$/;
 
 
 

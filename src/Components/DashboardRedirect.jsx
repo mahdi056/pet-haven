@@ -22,7 +22,18 @@ const DashboardRedirect = () => {
     }
   }, [user?.email]);
 
-  if (loading) return <p>Loading...</p>;
+    if (loading) {
+  return (
+    <div className="flex items-center justify-center min-h-screen">
+      
+      <div className="flex justify-center items-center">
+        
+        <span className="loading loading-spinner loading-xl"></span></div>
+
+
+    </div>
+  );
+}
 
   if (role === 'admin') {
     return <Navigate to="/dashboard/users" replace />;

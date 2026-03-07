@@ -31,7 +31,9 @@ const DonationHistory = () => {
                   className="w-full h-48 object-cover rounded mb-4"
                 />
                 <h3 className="text-lg font-semibold mb-1">{donation.petName}</h3>
-                <p className="text-gray-700">Donated Amount: {donation.amount} BDT</p>
+                <p className="text-gray-700">Donated Amount: {donation.amount}</p>
+                <p className="text-gray-700 text-sm">Donor Name: {donation.name}</p>
+                <p className="text-gray-700 text-sm">Donor Email: {donation.email}</p>
               </div>
             ))}
           </div>
